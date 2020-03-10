@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Library Web Service: Found Your Book Easier</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <header>
+            <h1>Library Web Service</h1>
+            <p id="libraryname">Nom de la bibliothèque</p>
+            <nav>
+                <!-- Search Bar -->
+                <form>
+                    <input type="text" />
+                </form>
+                <!-- Connexion / User Parameter -->
+            </nav>
+        </header>
+        <section>
+            <!-- Only for testing -->
+            <table>
+                <thead>
+                    <tr>
+                        <th> Title </th>
+                        <th> Author </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${books.empty}">
+                        <td colspan="2"> No Books Available </td>
+                    </tr>
+                    <!--/*@thymesVar id="books" type="java.util.List<generated.libraryservice.Book>"*/-->
+                    <tr th:each="book : ${books}">
+                        <td><span th:text="${book.title}"> Title </span></td>
+                        <td><span th:text="${book.author}"> Author </span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section>
+            <!-- Popup for asking the library -->
+        </section>
+        <section>
+            <!-- Content -->
+        </section>
+    </body>
+</html>
