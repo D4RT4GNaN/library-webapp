@@ -1,0 +1,11 @@
+#slider {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#slider-item {
+    display: inline-block;
+    margin: 0 10px 0 10px;
+    white-space: normal;
+    width: 250px;
+}

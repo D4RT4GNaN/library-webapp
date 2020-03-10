@@ -3,6 +3,7 @@
     <head>
         <title>Library Web Service: Found Your Book Easier</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
     </head>
     <body>
         <header>
@@ -10,38 +11,24 @@
             <p id="libraryname">Nom de la bibliothèque</p>
             <nav>
                 <!-- Search Bar -->
-                <form>
-                    <input type="text" />
+                <form method="get" action="/search">
+                    <input type="text" name="searchString" />
+                    <input type="submit" value="Search" />
                 </form>
                 <!-- Connexion / User Parameter -->
             </nav>
         </header>
-        <section>
-            <!-- Only for testing -->
-            <table>
-                <thead>
-                    <tr>
-                        <th> Title </th>
-                        <th> Author </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr th:if="${books.empty}">
-                        <td colspan="2"> No Books Available </td>
-                    </tr>
-                    <!--/*@thymesVar id="books" type="java.util.List<generated.libraryservice.Book>"*/-->
-                    <tr th:each="book : ${books}">
-                        <td><span th:text="${book.title}"> Title </span></td>
-                        <td><span th:text="${book.author}"> Author </span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-        <section>
-            <!-- Popup for asking the library -->
-        </section>
-        <section>
-            <!-- Content -->
+        <section th:each="category : ${categories}">
+            <h2 th:text="${category}"></h2>
+            <div id="slider">
+                <div id="slider-item" th:each="book : ${books}" th:if="${book.category} == ${category}">
+                    <img th:src="${book.imageUrl}" />
+                    <p>
+                        <span th:text="${book.title}"></span>
+                        </br><span th:text="${book.author}"></span>
+                    </p>
+                </div>
+            </div>
         </section>
     </body>
 </html>
