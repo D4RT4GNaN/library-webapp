@@ -3,19 +3,33 @@
     <head>
         <title>Library Web Service: Found Your Book Easier</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet" />
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+        <link th:href="@{/css/modal.css}" rel="stylesheet" type="text/css" />
+
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     </head>
     <body>
         <header>
             <h1>Library Web Service</h1>
-            <p id="libraryname">Nom de la bibliothèque</p>
             <nav>
                 <!-- Search Bar -->
                 <form method="get" action="/search">
                     <input type="text" name="searchString" />
                     <input type="submit" value="Search" />
                 </form>
-                <!-- Connexion / User Parameter -->
+
+                <!-- User Parameter -->
+                <div th:if="${user.getName()} != ${anonymousUser}">
+                    <p th:text="${user.getName()}"></p>
+                    <form name="logoutForm" th:action="@{/logout}" method="post">
+                        <input type="submit" value="Sign Out"/>
+                    </form>
+                </div>
+
+                <!-- Connexion Button -->
+                <button th:if="${user.getName()} == ${anonymousUser}" data-toggle="modal" data-target="#exampleModal">Connexion</button>
             </nav>
         </header>
         <section th:each="category : ${categories}">
@@ -30,5 +44,10 @@
                 </div>
             </div>
         </section>
+
+        <!-- th replace modal -->
+        <div th:replace="fragments/modal-signup :: modal-signup" />
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     </body>
 </html>
