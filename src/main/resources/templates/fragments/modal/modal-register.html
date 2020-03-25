@@ -1,0 +1,83 @@
+<div th:fragment="modal-register" class="register-box">
+    <!-- ----- HEADER ----- -->
+    <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Inscription</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <!-- ----- BODY ----- -->
+    <div class="modal-body">
+        <form th:action="@{/usager/register}" th:object="${user}" method="post" id="register-form" novalidate>
+            <div th:if="${#httpServletRequest.getParameter('registerError') != null}" th:text="${errorMessage}"></div>
+            <!-- username -->
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-at"></i></span>
+                </div>
+                <input type="email" id="register-email" th:field="*{email}" class="form-control" placeholder="Email" onkeyup="validateEmail()" required>
+            </div>
+
+            <!-- password -->
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                <input type="password" id="register-password" th:field="*{password}" class="form-control" placeholder="Mot de passe" onkeyup="validatePassword(this.id)" required>
+                <div class="messages"></div>
+            </div>
+
+            <!-- confirm password -->
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                <input type="password" id="register-confirm-password" th:field="*{confirmPassword}" class="form-control" placeholder="Confirmation" onkeyup="validateConfirmPassword('register-password', this.id)" required>
+                <div class="messages"></div>
+            </div>
+
+            <!-- first name -->
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" id="register-firstname" th:field="*{firstname}" class="form-control" placeholder="Prénom" onkeyup="validateBasicData(this.id)" required>
+                <div class="messages"></div>
+            </div>
+
+            <!-- last name -->
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                </div>
+                <input type="text" id="register-lastname" th:field="*{lastname}" class="form-control" placeholder="Nom" onkeyup="validateBasicData(this.id)" required>
+                <div class="messages"></div>
+            </div>
+
+            <!-- address -->
+            <div class="input-group form-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-home"></i></span>
+                </div>
+                <input type="text" id="register-address" th:field="*{adress}" th:value="${user.adress}" class="form-control" placeholder="Adresse" onkeyup="validateAddress();" required>
+                <div class="messages"></div>
+            </div>
+
+            <!-- submit -->
+            <div class="form-group">
+                <a href="javascript: submitRegisterForm();" class="btn float-right btn-outline-secondary">Sign Up</a>
+            </div>
+
+            <!-- protection against Cross-Site Request Forgery attacks -->
+            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+        </form>
+    </div>
+
+    <!-- ----- FOOTER ----- -->
+    <div class="modal-footer">
+        <div>
+            Already have an account ? <a href="javascript: showLoginForm();" id="login-link">Login</a>
+        </div>
+    </div>
+</div>

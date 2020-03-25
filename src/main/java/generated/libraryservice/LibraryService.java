@@ -8,6 +8,7 @@ import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.Action;
+import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -24,69 +25,6 @@ import javax.xml.ws.ResponseWrapper;
 })
 public interface LibraryService {
 
-
-    /**
-     * 
-     * @param usager
-     * @param email
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "http://LibraryService/updateUserInfos")
-    @WebResult(name = "status", targetNamespace = "")
-    @RequestWrapper(localName = "updateUserInfos", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.UpdateUserInfos")
-    @ResponseWrapper(localName = "updateUserInfosResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.UpdateUserInfosResponse")
-    @Action(input = "http://LibraryService/updateUserInfos", output = "http://LibraryService/LibraryService/updateUserInfosResponse")
-    public String updateUserInfos(
-        @WebParam(name = "email", targetNamespace = "")
-        String email,
-        @WebParam(name = "usager", targetNamespace = "")
-        Usager usager);
-
-    /**
-     * 
-     * @param userID
-     * @return
-     *     returns java.util.List<generated.libraryservice.Loan>
-     */
-    @WebMethod(action = "http://LibraryService/getLoansFor")
-    @WebResult(name = "loans", targetNamespace = "")
-    @RequestWrapper(localName = "getLoansFor", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetLoansFor")
-    @ResponseWrapper(localName = "getLoansForResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetLoansForResponse")
-    @Action(input = "http://LibraryService/getLoansFor", output = "http://LibraryService/LibraryService/getLoansForResponse")
-    public List<Loan> getLoansFor(
-        @WebParam(name = "userID", targetNamespace = "")
-        int userID);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<generated.libraryservice.Loan>
-     */
-    @WebMethod(operationName = "CheckExpiration", action = "http://LibraryService/CheckExpiration")
-    @WebResult(name = "loansOverdue", targetNamespace = "")
-    @RequestWrapper(localName = "CheckExpiration", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpiration")
-    @ResponseWrapper(localName = "CheckExpirationResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpirationResponse")
-    @Action(input = "http://LibraryService/CheckExpiration", output = "http://LibraryService/LibraryService/CheckExpirationResponse")
-    public List<Loan> checkExpiration();
-
-    /**
-     * 
-     * @param libraryIds
-     * @param bookReference
-     * @return
-     *     returns java.util.List<generated.libraryservice.Stock>
-     */
-    @WebMethod(action = "http://LibraryService/getBookAvailability")
-    @WebResult(name = "bookAvailability", targetNamespace = "")
-    @RequestWrapper(localName = "getBookAvailability", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailability")
-    @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
-    @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
-    public List<Stock> getBookAvailability(
-        @WebParam(name = "libraryIds", targetNamespace = "")
-        List<Integer> libraryIds,
-        @WebParam(name = "bookReference", targetNamespace = "")
-        String bookReference);
 
     /**
      * 
@@ -171,15 +109,20 @@ public interface LibraryService {
      * @param generatedUsager
      * @return
      *     returns java.lang.String
+     * @throws EmailExistsException
      */
     @WebMethod(action = "http://LibraryService/addUser")
     @WebResult(name = "status", targetNamespace = "")
     @RequestWrapper(localName = "addUser", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUser")
     @ResponseWrapper(localName = "addUserResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUserResponse")
-    @Action(input = "http://LibraryService/addUser", output = "http://LibraryService/LibraryService/addUserResponse")
+    @Action(input = "http://LibraryService/addUser", output = "http://LibraryService/LibraryService/addUserResponse", fault = {
+        @FaultAction(className = EmailExistsException.class, value = "http://LibraryService/LibraryService/addUser/Fault/EmailExistsException")
+    })
     public String addUser(
         @WebParam(name = "generatedUsager", targetNamespace = "")
-        Usager generatedUsager);
+        Usager generatedUsager)
+        throws EmailExistsException
+    ;
 
     /**
      * 
@@ -187,17 +130,40 @@ public interface LibraryService {
      * @param password
      * @return
      *     returns generated.libraryservice.Usager
+     * @throws BadCredentialsException
      */
     @WebMethod(action = "http://LibraryService/connectUser")
     @WebResult(name = "user", targetNamespace = "")
     @RequestWrapper(localName = "connectUser", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ConnectUser")
     @ResponseWrapper(localName = "connectUserResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ConnectUserResponse")
-    @Action(input = "http://LibraryService/connectUser", output = "http://LibraryService/LibraryService/connectUserResponse")
+    @Action(input = "http://LibraryService/connectUser", output = "http://LibraryService/LibraryService/connectUserResponse", fault = {
+        @FaultAction(className = BadCredentialsException.class, value = "http://LibraryService/LibraryService/connectUser/Fault/BadCredentialsException")
+    })
     public Usager connectUser(
         @WebParam(name = "identifier", targetNamespace = "")
         String identifier,
         @WebParam(name = "password", targetNamespace = "")
-        String password);
+        String password)
+        throws BadCredentialsException
+    ;
+
+    /**
+     * 
+     * @param libraryIds
+     * @param bookReference
+     * @return
+     *     returns java.util.List<generated.libraryservice.Stock>
+     */
+    @WebMethod(action = "http://LibraryService/getBookAvailability")
+    @WebResult(name = "bookAvailability", targetNamespace = "")
+    @RequestWrapper(localName = "getBookAvailability", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailability")
+    @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
+    @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
+    public List<Stock> getBookAvailability(
+        @WebParam(name = "libraryIds", targetNamespace = "")
+        List<Integer> libraryIds,
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference);
 
     /**
      * 
@@ -234,15 +200,20 @@ public interface LibraryService {
      * @param email
      * @return
      *     returns java.lang.String
+     * @throws ForgotPasswordException
      */
     @WebMethod(action = "http://LibraryService/requestPasswordReset")
     @WebResult(name = "status", targetNamespace = "")
     @RequestWrapper(localName = "requestPasswordReset", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.RequestPasswordReset")
     @ResponseWrapper(localName = "requestPasswordResetResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.RequestPasswordResetResponse")
-    @Action(input = "http://LibraryService/requestPasswordReset", output = "http://LibraryService/LibraryService/requestPasswordResetResponse")
+    @Action(input = "http://LibraryService/requestPasswordReset", output = "http://LibraryService/LibraryService/requestPasswordResetResponse", fault = {
+        @FaultAction(className = ForgotPasswordException.class, value = "http://LibraryService/LibraryService/requestPasswordReset/Fault/ForgotPasswordException")
+    })
     public String requestPasswordReset(
         @WebParam(name = "email", targetNamespace = "")
-        String email);
+        String email)
+        throws ForgotPasswordException
+    ;
 
     /**
      * 
@@ -285,5 +256,50 @@ public interface LibraryService {
         String newPassword,
         @WebParam(name = "confirmNewPassword", targetNamespace = "")
         String confirmNewPassword);
+
+    /**
+     * 
+     * @param usager
+     * @param email
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "http://LibraryService/updateUserInfos")
+    @WebResult(name = "status", targetNamespace = "")
+    @RequestWrapper(localName = "updateUserInfos", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.UpdateUserInfos")
+    @ResponseWrapper(localName = "updateUserInfosResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.UpdateUserInfosResponse")
+    @Action(input = "http://LibraryService/updateUserInfos", output = "http://LibraryService/LibraryService/updateUserInfosResponse")
+    public String updateUserInfos(
+        @WebParam(name = "email", targetNamespace = "")
+        String email,
+        @WebParam(name = "usager", targetNamespace = "")
+        Usager usager);
+
+    /**
+     * 
+     * @param userID
+     * @return
+     *     returns java.util.List<generated.libraryservice.Loan>
+     */
+    @WebMethod(action = "http://LibraryService/getLoansFor")
+    @WebResult(name = "loans", targetNamespace = "")
+    @RequestWrapper(localName = "getLoansFor", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetLoansFor")
+    @ResponseWrapper(localName = "getLoansForResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetLoansForResponse")
+    @Action(input = "http://LibraryService/getLoansFor", output = "http://LibraryService/LibraryService/getLoansForResponse")
+    public List<Loan> getLoansFor(
+        @WebParam(name = "userID", targetNamespace = "")
+        int userID);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<generated.libraryservice.Loan>
+     */
+    @WebMethod(operationName = "CheckExpiration", action = "http://LibraryService/CheckExpiration")
+    @WebResult(name = "loansOverdue", targetNamespace = "")
+    @RequestWrapper(localName = "CheckExpiration", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpiration")
+    @ResponseWrapper(localName = "CheckExpirationResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpirationResponse")
+    @Action(input = "http://LibraryService/CheckExpiration", output = "http://LibraryService/LibraryService/CheckExpirationResponse")
+    public List<Loan> checkExpiration();
 
 }

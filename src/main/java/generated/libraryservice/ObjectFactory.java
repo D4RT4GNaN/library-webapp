@@ -1,7 +1,10 @@
 
 package generated.libraryservice;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
+import javax.xml.namespace.QName;
 
 
 /**
@@ -21,6 +24,9 @@ import javax.xml.bind.annotation.XmlRegistry;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _EmailExistsFault_QNAME = new QName("http://LibraryService/", "EmailExistsFault");
+    private final static QName _ForgotPasswordFault_QNAME = new QName("http://LibraryService/", "ForgotPasswordFault");
+    private final static QName _BadCredentialsFault_QNAME = new QName("http://LibraryService/", "BadCredentialsFault");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.libraryservice
@@ -75,6 +81,14 @@ public class ObjectFactory {
      */
     public Usager createUsager() {
         return new Usager();
+    }
+
+    /**
+     * Create an instance of {@link UnspecifiedFault }
+     * 
+     */
+    public UnspecifiedFault createUnspecifiedFault() {
+        return new UnspecifiedFault();
     }
 
     /**
@@ -323,6 +337,33 @@ public class ObjectFactory {
      */
     public Library createLibrary() {
         return new Library();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "EmailExistsFault")
+    public JAXBElement<UnspecifiedFault> createEmailExistsFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_EmailExistsFault_QNAME, UnspecifiedFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "ForgotPasswordFault")
+    public JAXBElement<UnspecifiedFault> createForgotPasswordFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_ForgotPasswordFault_QNAME, UnspecifiedFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "BadCredentialsFault")
+    public JAXBElement<UnspecifiedFault> createBadCredentialsFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_BadCredentialsFault_QNAME, UnspecifiedFault.class, null, value);
     }
 
 }
