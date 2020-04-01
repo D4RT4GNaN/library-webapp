@@ -24,9 +24,11 @@ import javax.xml.namespace.QName;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _EmailExistsFault_QNAME = new QName("http://LibraryService/", "EmailExistsFault");
+    private final static QName _UpdateUserFault_QNAME = new QName("http://LibraryService/", "UpdateUserFault");
+    private final static QName _RegisterFault_QNAME = new QName("http://LibraryService/", "RegisterFault");
+    private final static QName _EmailSendingFault_QNAME = new QName("http://LibraryService/", "EmailSendingFault");
     private final static QName _ForgotPasswordFault_QNAME = new QName("http://LibraryService/", "ForgotPasswordFault");
-    private final static QName _BadCredentialsFault_QNAME = new QName("http://LibraryService/", "BadCredentialsFault");
+    private final static QName _LoginFault_QNAME = new QName("http://LibraryService/", "LoginFault");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: generated.libraryservice
@@ -68,6 +70,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UsagerUnspecifiedFault }
+     * 
+     */
+    public UsagerUnspecifiedFault createUsagerUnspecifiedFault() {
+        return new UsagerUnspecifiedFault();
+    }
+
+    /**
      * Create an instance of {@link AddUser }
      * 
      */
@@ -81,14 +91,6 @@ public class ObjectFactory {
      */
     public Usager createUsager() {
         return new Usager();
-    }
-
-    /**
-     * Create an instance of {@link UnspecifiedFault }
-     * 
-     */
-    public UnspecifiedFault createUnspecifiedFault() {
-        return new UnspecifiedFault();
     }
 
     /**
@@ -252,6 +254,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link UnspecifiedFault }
+     * 
+     */
+    public UnspecifiedFault createUnspecifiedFault() {
+        return new UnspecifiedFault();
+    }
+
+    /**
      * Create an instance of {@link ResendVerificationEmail }
      * 
      */
@@ -343,9 +353,27 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://LibraryService/", name = "EmailExistsFault")
-    public JAXBElement<UnspecifiedFault> createEmailExistsFault(UnspecifiedFault value) {
-        return new JAXBElement<UnspecifiedFault>(_EmailExistsFault_QNAME, UnspecifiedFault.class, null, value);
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "UpdateUserFault")
+    public JAXBElement<UnspecifiedFault> createUpdateUserFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_UpdateUserFault_QNAME, UnspecifiedFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UsagerUnspecifiedFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "RegisterFault")
+    public JAXBElement<UsagerUnspecifiedFault> createRegisterFault(UsagerUnspecifiedFault value) {
+        return new JAXBElement<UsagerUnspecifiedFault>(_RegisterFault_QNAME, UsagerUnspecifiedFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "EmailSendingFault")
+    public JAXBElement<UnspecifiedFault> createEmailSendingFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_EmailSendingFault_QNAME, UnspecifiedFault.class, null, value);
     }
 
     /**
@@ -361,9 +389,9 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
      * 
      */
-    @XmlElementDecl(namespace = "http://LibraryService/", name = "BadCredentialsFault")
-    public JAXBElement<UnspecifiedFault> createBadCredentialsFault(UnspecifiedFault value) {
-        return new JAXBElement<UnspecifiedFault>(_BadCredentialsFault_QNAME, UnspecifiedFault.class, null, value);
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "LoginFault")
+    public JAXBElement<UnspecifiedFault> createLoginFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_LoginFault_QNAME, UnspecifiedFault.class, null, value);
     }
 
 }

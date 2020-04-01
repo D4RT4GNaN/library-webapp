@@ -1,4 +1,4 @@
-<div th:fragment="modal-register" class="register-box">
+<div th:fragment="modal-register" class="register-box" xmlns:th="http://www.thymeleaf.org">
     <!-- ----- HEADER ----- -->
     <div class="modal-header">
         <h5 class="modal-title" id="registerModalLabel">Inscription</h5>
@@ -9,14 +9,16 @@
 
     <!-- ----- BODY ----- -->
     <div class="modal-body">
+        <!--/*@thymesVar id="user" type="generated.libraryservice.Usager"*/-->
         <form th:action="@{/usager/register}" th:object="${user}" method="post" id="register-form" novalidate>
+            <!--/*@thymesVar id="errorMessage" type="String"*/-->
             <div th:if="${#httpServletRequest.getParameter('registerError') != null}" th:text="${errorMessage}"></div>
             <!-- username -->
             <div class="input-group form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-at"></i></span>
                 </div>
-                <input type="email" id="register-email" th:field="*{email}" class="form-control" placeholder="Email" onkeyup="validateEmail()" required>
+                <input type="email" id="register-email" th:field="${user.email}" class="form-control" placeholder="Email" onkeyup="validateEmail()" required>
             </div>
 
             <!-- password -->
@@ -78,6 +80,9 @@
     <div class="modal-footer">
         <div>
             Already have an account ? <a href="javascript: showLoginForm();" id="login-link">Login</a>
+        </div>
+        <div>
+            You didn't receive the email ? <a href="javascript: showResendEmailForm();">Resend it</a>
         </div>
     </div>
 </div>

@@ -21,7 +21,7 @@ public class Utils {
         String [] referer = request.getHeader("referer").split("/");
 
         for (int i = 3; i <= referer.length-1; i++) {
-            link += referer[i];
+            link += deleteErrorParameter(referer[i]);
             link += i < referer.length-1 ? "/" : "";
         }
 

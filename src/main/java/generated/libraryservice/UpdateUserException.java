@@ -10,8 +10,8 @@ import javax.xml.ws.WebFault;
  * Generated source version: 2.2
  * 
  */
-@WebFault(name = "BadCredentialsFault", targetNamespace = "http://LibraryService/")
-public class BadCredentialsException
+@WebFault(name = "UpdateUserFault", targetNamespace = "http://LibraryService/")
+public class UpdateUserException
     extends Exception
 {
 
@@ -26,7 +26,7 @@ public class BadCredentialsException
      * @param faultInfo
      * @param message
      */
-    public BadCredentialsException(String message, UnspecifiedFault faultInfo) {
+    public UpdateUserException(String message, UnspecifiedFault faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class BadCredentialsException
      * @param cause
      * @param message
      */
-    public BadCredentialsException(String message, UnspecifiedFault faultInfo, Throwable cause) {
+    public UpdateUserException(String message, UnspecifiedFault faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }

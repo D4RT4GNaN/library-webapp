@@ -9,7 +9,6 @@ import org.openclassroom.project.librarywebapp.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -23,6 +22,10 @@ public abstract class AbstractController {
     private IAuthenticationFacade authenticationFacade;
 
     protected LibraryService libraryService = new LibraryServiceService().getLibraryServicePort();
+
+    public Authentication getAuthentication() {
+        return authenticationFacade.getAuthentication();
+    }
 
     protected List<String> getCategories(List<Book> books) {
         Set<String> categories = new HashSet<>();

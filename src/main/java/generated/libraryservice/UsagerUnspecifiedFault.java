@@ -8,15 +8,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for unspecifiedFault complex type.
+ * <p>Java class for usagerUnspecifiedFault complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="unspecifiedFault">
+ * &lt;complexType name="usagerUnspecifiedFault">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
+ *         &lt;element name="usager" type="{http://LibraryService/}usager"/>
  *         &lt;element name="message" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -27,13 +28,40 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "unspecifiedFault", propOrder = {
+@XmlType(name = "usagerUnspecifiedFault", propOrder = {
+    "usager",
     "message"
 })
-public class UnspecifiedFault {
+public class UsagerUnspecifiedFault {
 
     @XmlElement(required = true)
+    protected Usager usager;
+    @XmlElement(required = true)
     protected String message;
+
+    /**
+     * Gets the value of the usager property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Usager }
+     *     
+     */
+    public Usager getUsager() {
+        return usager;
+    }
+
+    /**
+     * Sets the value of the usager property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Usager }
+     *     
+     */
+    public void setUsager(Usager value) {
+        this.usager = value;
+    }
 
     /**
      * Gets the value of the message property.

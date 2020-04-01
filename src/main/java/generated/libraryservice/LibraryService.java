@@ -109,19 +109,19 @@ public interface LibraryService {
      * @param generatedUsager
      * @return
      *     returns java.lang.String
-     * @throws EmailExistsException
+     * @throws RegisterException
      */
     @WebMethod(action = "http://LibraryService/addUser")
     @WebResult(name = "status", targetNamespace = "")
     @RequestWrapper(localName = "addUser", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUser")
     @ResponseWrapper(localName = "addUserResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUserResponse")
     @Action(input = "http://LibraryService/addUser", output = "http://LibraryService/LibraryService/addUserResponse", fault = {
-        @FaultAction(className = EmailExistsException.class, value = "http://LibraryService/LibraryService/addUser/Fault/EmailExistsException")
+        @FaultAction(className = RegisterException.class, value = "http://LibraryService/LibraryService/addUser/Fault/RegisterException")
     })
     public String addUser(
         @WebParam(name = "generatedUsager", targetNamespace = "")
         Usager generatedUsager)
-        throws EmailExistsException
+        throws RegisterException
     ;
 
     /**
@@ -130,21 +130,21 @@ public interface LibraryService {
      * @param password
      * @return
      *     returns generated.libraryservice.Usager
-     * @throws BadCredentialsException
+     * @throws LoginException
      */
     @WebMethod(action = "http://LibraryService/connectUser")
     @WebResult(name = "user", targetNamespace = "")
     @RequestWrapper(localName = "connectUser", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ConnectUser")
     @ResponseWrapper(localName = "connectUserResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ConnectUserResponse")
     @Action(input = "http://LibraryService/connectUser", output = "http://LibraryService/LibraryService/connectUserResponse", fault = {
-        @FaultAction(className = BadCredentialsException.class, value = "http://LibraryService/LibraryService/connectUser/Fault/BadCredentialsException")
+        @FaultAction(className = LoginException.class, value = "http://LibraryService/LibraryService/connectUser/Fault/LoginException")
     })
     public Usager connectUser(
         @WebParam(name = "identifier", targetNamespace = "")
         String identifier,
         @WebParam(name = "password", targetNamespace = "")
         String password)
-        throws BadCredentialsException
+        throws LoginException
     ;
 
     /**
@@ -185,15 +185,20 @@ public interface LibraryService {
      * @param email
      * @return
      *     returns java.lang.String
+     * @throws EmailSendingException
      */
     @WebMethod(action = "http://LibraryService/resendVerificationEmail")
     @WebResult(name = "status", targetNamespace = "")
     @RequestWrapper(localName = "resendVerificationEmail", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ResendVerificationEmail")
     @ResponseWrapper(localName = "resendVerificationEmailResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ResendVerificationEmailResponse")
-    @Action(input = "http://LibraryService/resendVerificationEmail", output = "http://LibraryService/LibraryService/resendVerificationEmailResponse")
+    @Action(input = "http://LibraryService/resendVerificationEmail", output = "http://LibraryService/LibraryService/resendVerificationEmailResponse", fault = {
+        @FaultAction(className = EmailSendingException.class, value = "http://LibraryService/LibraryService/resendVerificationEmail/Fault/EmailSendingException")
+    })
     public String resendVerificationEmail(
         @WebParam(name = "email", targetNamespace = "")
-        String email);
+        String email)
+        throws EmailSendingException
+    ;
 
     /**
      * 
@@ -263,17 +268,22 @@ public interface LibraryService {
      * @param email
      * @return
      *     returns java.lang.String
+     * @throws UpdateUserException
      */
     @WebMethod(action = "http://LibraryService/updateUserInfos")
     @WebResult(name = "status", targetNamespace = "")
     @RequestWrapper(localName = "updateUserInfos", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.UpdateUserInfos")
     @ResponseWrapper(localName = "updateUserInfosResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.UpdateUserInfosResponse")
-    @Action(input = "http://LibraryService/updateUserInfos", output = "http://LibraryService/LibraryService/updateUserInfosResponse")
+    @Action(input = "http://LibraryService/updateUserInfos", output = "http://LibraryService/LibraryService/updateUserInfosResponse", fault = {
+        @FaultAction(className = UpdateUserException.class, value = "http://LibraryService/LibraryService/updateUserInfos/Fault/UpdateUserException")
+    })
     public String updateUserInfos(
         @WebParam(name = "email", targetNamespace = "")
         String email,
         @WebParam(name = "usager", targetNamespace = "")
-        Usager usager);
+        Usager usager)
+        throws UpdateUserException
+    ;
 
     /**
      * 

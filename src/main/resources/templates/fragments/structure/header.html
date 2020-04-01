@@ -9,8 +9,8 @@
 
         <!-- User Parameter -->
         <div th:unless="${authentication.equals('anonymousUser')}">
-            <p th:text="${user.getEmail()}"></p>
-            <p th:text="${user.getAdress()}"></p>
+            <p th:text="${user.firstname}"></p>
+            <a href="/usager/parameter"><i class="fas fa-cog"></i>Parameter</a>
             <form name="logoutForm" th:action="@{/logout}" method="post">
                 <input type="submit" value="Sign Out"/>
             </form>

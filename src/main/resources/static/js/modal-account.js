@@ -1,6 +1,7 @@
 const loginBox = $('.login-box');
 const registerBox = $('.register-box');
 const forgotPasswordBox = $('.forgot-password-box');
+const resendEmailBox = $('.resend-email-box');
 
 function openLoginForm() {
     showLoginForm();
@@ -12,6 +13,7 @@ function openLoginForm() {
 function openRegisterForm() {
     loginBox.hide();
     forgotPasswordBox.hide();
+    resendEmailBox.hide();
     registerBox.fadeIn('fast');
     setTimeout(function(){
         $('#modal-account').modal('show');
@@ -21,7 +23,18 @@ function openRegisterForm() {
 function openForgotPasswordForm() {
     loginBox.hide();
     registerBox.hide();
+    resendEmailBox.hide();
     forgotPasswordBox.fadeIn('fast');
+    setTimeout(function(){
+        $('#modal-account').modal('show');
+    }, 230);
+}
+
+function openResendEmailForm() {
+    loginBox.hide();
+    registerBox.hide();
+    forgotPasswordBox.hide();
+    resendEmailBox.fadeIn('fast');
     setTimeout(function(){
         $('#modal-account').modal('show');
     }, 230);
@@ -43,9 +56,14 @@ function showLoginForm() {
             loginBox.fadeIn('fast');
             cleanRegisterForm();
         });
+    } else if (resendEmailBox.is(':visible')) {
+        resendEmailBox.fadeOut('fast', function () {
+           loginBox.fadeIn('fast');
+        });
     } else {
         registerBox.hide();
         forgotPasswordBox.hide();
+        resendEmailBox.hide();
         loginBox.fadeIn('fast');
     }
 }
@@ -53,6 +71,12 @@ function showLoginForm() {
 function showForgotPasswordForm() {
     loginBox.fadeOut('fast', function () {
         forgotPasswordBox.fadeIn('fast');
+    });
+}
+
+function showResendEmailForm() {
+    registerBox.fadeOut('fast', function () {
+        resendEmailBox.fadeIn('fast');
     });
 }
 

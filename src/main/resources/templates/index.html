@@ -30,6 +30,10 @@
                 openRegisterForm();
             } else if (url.indexOf('forgotPasswordError=true') !== -1) {
                 openForgotPasswordForm();
+            } else if(url.indexOf('emailSendingError=true') !== -1) {
+                openResendEmailForm();
+            } else if (url.indexOf('confirmEmailSuccess=true') !== -1) {
+                alert('email confirmed !');
             }
         </script>
     </body>

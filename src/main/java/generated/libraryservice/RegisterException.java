@@ -10,8 +10,8 @@ import javax.xml.ws.WebFault;
  * Generated source version: 2.2
  * 
  */
-@WebFault(name = "EmailExistsFault", targetNamespace = "http://LibraryService/")
-public class EmailExistsException
+@WebFault(name = "RegisterFault", targetNamespace = "http://LibraryService/")
+public class RegisterException
     extends Exception
 {
 
@@ -19,14 +19,14 @@ public class EmailExistsException
      * Java type that goes as soapenv:Fault detail element.
      * 
      */
-    private UnspecifiedFault faultInfo;
+    private UsagerUnspecifiedFault faultInfo;
 
     /**
      * 
      * @param faultInfo
      * @param message
      */
-    public EmailExistsException(String message, UnspecifiedFault faultInfo) {
+    public RegisterException(String message, UsagerUnspecifiedFault faultInfo) {
         super(message);
         this.faultInfo = faultInfo;
     }
@@ -37,7 +37,7 @@ public class EmailExistsException
      * @param cause
      * @param message
      */
-    public EmailExistsException(String message, UnspecifiedFault faultInfo, Throwable cause) {
+    public RegisterException(String message, UsagerUnspecifiedFault faultInfo, Throwable cause) {
         super(message, cause);
         this.faultInfo = faultInfo;
     }
@@ -45,9 +45,9 @@ public class EmailExistsException
     /**
      * 
      * @return
-     *     returns fault bean: generated.libraryservice.UnspecifiedFault
+     *     returns fault bean: generated.libraryservice.UsagerUnspecifiedFault
      */
-    public UnspecifiedFault getFaultInfo() {
+    public UsagerUnspecifiedFault getFaultInfo() {
         return faultInfo;
     }
 

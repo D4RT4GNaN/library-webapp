@@ -2,6 +2,7 @@ package org.openclassroom.project.librarywebapp.security.authentication;
 
 import generated.libraryservice.LibraryService;
 import generated.libraryservice.LibraryServiceService;
+import generated.libraryservice.LoginException;
 import generated.libraryservice.Usager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -23,8 +24,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         Usager usager;
         try {
             usager = libraryService.connectUser(name, password);
-        } catch (generated.libraryservice.BadCredentialsException bce) {
-            throw new BadCredentialsException(bce.getMessage());
+        } catch (LoginException logEx) {
+            throw new BadCredentialsException(logEx.getMessage());
         }
 
         if(usager != null) {
