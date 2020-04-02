@@ -5,8 +5,8 @@
         <header th:replace="fragments/structure/header :: header" />
         <section th:each="category : ${categories}">
             <h2 th:text="${category}"></h2>
-            <div id="slider">
-                <div id="slider-item" th:each="book : ${books}" th:if="${book.category} == ${category}">
+            <div class="slider">
+                <div class="slider-item" th:each="book : ${books}" th:if="${book.category} == ${category}" th:id="${book.reference}" onclick="getBookDetailView(this.id)">
                     <img th:src="${book.imageUrl}" />
                     <p>
                         <span th:text="${book.title}"></span>
@@ -23,18 +23,11 @@
         <script th:src="@{/js/modal-account.js}" type="text/javascript"></script>
         <script th:src="@{/js/form-validating.js}" type="text/javascript"></script>
         <script type="text/javascript" th:inline="javascript">
-            let url = window.location.href;
-            if(url.indexOf('loginError=true') !== -1) {
-                openLoginForm();
-            } else if (url.indexOf('registerError=true') !== -1) {
-                openRegisterForm();
-            } else if (url.indexOf('forgotPasswordError=true') !== -1) {
-                openForgotPasswordForm();
-            } else if(url.indexOf('emailSendingError=true') !== -1) {
-                openResendEmailForm();
-            } else if (url.indexOf('confirmEmailSuccess=true') !== -1) {
-                alert('email confirmed !');
+            function getBookDetailView(reference) {
+                let baseLink = /*[[@{/book-detail/}]]*/'';
+                location.href = baseLink + reference;
             }
+
         </script>
     </body>
 </html>

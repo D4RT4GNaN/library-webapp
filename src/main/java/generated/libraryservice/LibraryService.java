@@ -149,7 +149,6 @@ public interface LibraryService {
 
     /**
      * 
-     * @param libraryIds
      * @param bookReference
      * @return
      *     returns java.util.List<generated.libraryservice.Stock>
@@ -160,8 +159,6 @@ public interface LibraryService {
     @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
     @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
     public List<Stock> getBookAvailability(
-        @WebParam(name = "libraryIds", targetNamespace = "")
-        List<Integer> libraryIds,
         @WebParam(name = "bookReference", targetNamespace = "")
         String bookReference);
 

@@ -3,6 +3,19 @@ const registerBox = $('.register-box');
 const forgotPasswordBox = $('.forgot-password-box');
 const resendEmailBox = $('.resend-email-box');
 
+let url = window.location.href;
+if(url.indexOf('loginError=true') !== -1) {
+    openLoginForm();
+} else if (url.indexOf('registerError=true') !== -1) {
+    openRegisterForm();
+} else if (url.indexOf('forgotPasswordError=true') !== -1) {
+    openForgotPasswordForm();
+} else if(url.indexOf('emailSendingError=true') !== -1) {
+    openResendEmailForm();
+} else if (url.indexOf('confirmEmailSuccess=true') !== -1) {
+    alert('email confirmed !');
+}
+
 function openLoginForm() {
     showLoginForm();
     setTimeout(function(){

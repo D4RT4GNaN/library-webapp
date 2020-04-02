@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,24 @@ public class IndexController extends AbstractController {
         configModel(model, request, usager, message, searchString);
 
         return "index";
+    }
+
+
+
+    // ==================== Book Detail Method ====================
+    @GetMapping("/book-detail/{reference}")
+    public String showBookDetail(Model model, @PathVariable String reference, @ModelAttribute("user")Usager usager, @ModelAttribute("errorMessage")String message, HttpServletRequest request) {
+        model.addAttribute("authentication", getAuthentication().getName());
+        model.addAttribute("user", usager);
+        model.addAttribute("book", libraryService.getBooksWithKeyword(reference).get(0));
+
+        String loginErrorMessage = Utils.getErrorMessage(request);
+        if (loginErrorMessage != null) { message = loginErrorMessage; }
+        if (!message.equals("")) { model.addAttribute("errorMessage", message); }
+
+        model.addAttribute("stocks", libraryService.getBookAvailability(reference));
+
+        return "book-detail";
     }
 
 
