@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/structure/head :: head">
+<body>
+    <header th:replace="fragments/structure/header :: header" />
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#personal-data">Informations personnelles</a></li>
+            <li><a data-toggle="tab" href="#loan">Emprunt</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="personal-data" class="tab-pane fade in active show">
+                <div>
+                    <h3>Informations Personnelles</h3>
+                    <a href="javascript: editOrCancel();"><i id="edit-button" class="fas fa-edit"></i></a>
+                </div>
+                <form id="personal-data-form" th:object="${user}" th:action="@{/usager/update-user}" method="post">
+                    <input type="text" th:field="*{firstname}" class="personal-data-input" readonly />
+                    <input type="text" th:field="*{lastname}" class="personal-data-input" readonly />
+                    <input type="email" th:field="*{email}" class="personal-data-input" readonly />
+                    <input type="text" th:field="*{adress}" class="personal-data-input" readonly />
+                    <input type="hidden" id="personal-data-submit" />
+                </form>
+
+                <h3>Mot de passe</h3>
+                <p th:text="${successMessage}"></p>
+                <form th:action="@{/usager/change-password}" th:object="${user}" method="post">
+                    <input type="password" th:field="*{password}" />
+                    <input type="password" th:field="*{confirmPassword}" />
+                    <input type="submit" />
+                </form>
+            </div>
+            <div id="loan" class="tab-pane fade">
+                <h3>Menu 1</h3>
+                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
+    <script>
+        function toggleEditButton() {
+            let editButton = document.querySelector("#edit-button");
+            if (editButton.classList.contains("fa-edit")) {
+                editButton.classList.remove("fa-edit");
+                editButton.classList.add("fa-times");
+            } else {
+                editButton.classList.remove("fa-times");
+                editButton.classList.add("fa-edit");
+            }
+        }
+
+        function toggleInput() {
+            $("form#personal-data-form :input[class=personal-data-input]").each(function(){
+                let input = $(this);
+                input.is("[readonly]") ? input.removeAttr("readonly") : input.attr("readonly", "readonly");
+            });
+
+            let submitButton = $('#personal-data-submit');
+            if (submitButton.is("[type=hidden]")) {
+                submitButton.attr("type", "submit");
+            } else {
+                submitButton.attr("type", "hidden");
+                $("#personal-data-form")[0].reset();
+            }
+        }
+
+        function editOrCancel() {
+            toggleEditButton();
+            toggleInput();
+        }
+    </script>
+</body>
+</html>

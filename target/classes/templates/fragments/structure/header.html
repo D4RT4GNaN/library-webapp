@@ -1,0 +1,22 @@
+<header th:fragment="head">
+    <h1>Library Web Service</h1>
+    <nav>
+        <!-- Search Bar -->
+        <form method="get" action="/search">
+            <input type="text" name="searchString" />
+            <input type="submit" value="Search" />
+        </form>
+
+        <!-- User Parameter -->
+        <div th:unless="${authentication.equals('anonymousUser')}">
+            <p th:text="${user.firstname}"></p>
+            <a href="/usager/parameter"><i class="fas fa-cog"></i>Parameter</a>
+            <form name="logoutForm" th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out"/>
+            </form>
+        </div>
+
+        <!-- Connexion Button -->
+        <a class="btn btn-outline-secondary" th:if="${authentication.equals('anonymousUser')}" href="javascript: openLoginForm();">Connexion</a>
+    </nav>
+</header>

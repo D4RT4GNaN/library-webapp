@@ -7,6 +7,7 @@ import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.Action;
 import javax.xml.ws.FaultAction;
 import javax.xml.ws.RequestWrapper;
@@ -28,7 +29,36 @@ public interface LibraryService {
 
     /**
      * 
-     * @param newLoan
+     * @return
+     *     returns java.util.List<generated.libraryservice.Loan>
+     */
+    @WebMethod(operationName = "CheckExpiration", action = "http://LibraryService/CheckExpiration")
+    @WebResult(name = "loansOverdue", targetNamespace = "")
+    @RequestWrapper(localName = "CheckExpiration", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpiration")
+    @ResponseWrapper(localName = "CheckExpirationResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpirationResponse")
+    @Action(input = "http://LibraryService/CheckExpiration", output = "http://LibraryService/LibraryService/CheckExpirationResponse")
+    public List<Loan> checkExpiration();
+
+    /**
+     * 
+     * @param bookReference
+     * @return
+     *     returns java.util.List<generated.libraryservice.Stock>
+     */
+    @WebMethod(action = "http://LibraryService/getBookAvailability")
+    @WebResult(name = "bookAvailability", targetNamespace = "")
+    @RequestWrapper(localName = "getBookAvailability", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailability")
+    @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
+    @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
+    public List<Stock> getBookAvailability(
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference);
+
+    /**
+     * 
+     * @param libraryId
+     * @param usager
+     * @param bookReference
      * @return
      *     returns java.lang.String
      */
@@ -38,8 +68,12 @@ public interface LibraryService {
     @ResponseWrapper(localName = "addNewLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddNewLoanResponse")
     @Action(input = "http://LibraryService/addNewLoan", output = "http://LibraryService/LibraryService/addNewLoanResponse")
     public String addNewLoan(
-        @WebParam(name = "newLoan", targetNamespace = "")
-        Loan newLoan);
+        @WebParam(name = "libraryId", targetNamespace = "")
+        int libraryId,
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference,
+        @WebParam(name = "usager", targetNamespace = "")
+        Usager usager);
 
     /**
      * 
@@ -58,7 +92,10 @@ public interface LibraryService {
 
     /**
      * 
-     * @param loan
+     * @param libraryId
+     * @param usager
+     * @param borrowingDate
+     * @param bookReference
      * @return
      *     returns java.lang.String
      */
@@ -68,8 +105,14 @@ public interface LibraryService {
     @ResponseWrapper(localName = "returnBookResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ReturnBookResponse")
     @Action(input = "http://LibraryService/returnBook", output = "http://LibraryService/LibraryService/returnBookResponse")
     public String returnBook(
-        @WebParam(name = "loan", targetNamespace = "")
-        Loan loan);
+        @WebParam(name = "borrowingDate", targetNamespace = "")
+        XMLGregorianCalendar borrowingDate,
+        @WebParam(name = "libraryId", targetNamespace = "")
+        int libraryId,
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference,
+        @WebParam(name = "usager", targetNamespace = "")
+        Usager usager);
 
     /**
      * 
@@ -146,21 +189,6 @@ public interface LibraryService {
         String password)
         throws LoginException
     ;
-
-    /**
-     * 
-     * @param bookReference
-     * @return
-     *     returns java.util.List<generated.libraryservice.Stock>
-     */
-    @WebMethod(action = "http://LibraryService/getBookAvailability")
-    @WebResult(name = "bookAvailability", targetNamespace = "")
-    @RequestWrapper(localName = "getBookAvailability", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailability")
-    @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
-    @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
-    public List<Stock> getBookAvailability(
-        @WebParam(name = "bookReference", targetNamespace = "")
-        String bookReference);
 
     /**
      * 
@@ -296,17 +324,5 @@ public interface LibraryService {
     public List<Loan> getLoansFor(
         @WebParam(name = "userID", targetNamespace = "")
         int userID);
-
-    /**
-     * 
-     * @return
-     *     returns java.util.List<generated.libraryservice.Loan>
-     */
-    @WebMethod(operationName = "CheckExpiration", action = "http://LibraryService/CheckExpiration")
-    @WebResult(name = "loansOverdue", targetNamespace = "")
-    @RequestWrapper(localName = "CheckExpiration", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpiration")
-    @ResponseWrapper(localName = "CheckExpirationResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpirationResponse")
-    @Action(input = "http://LibraryService/CheckExpiration", output = "http://LibraryService/LibraryService/CheckExpirationResponse")
-    public List<Loan> checkExpiration();
 
 }
