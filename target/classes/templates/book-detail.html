@@ -33,9 +33,6 @@
             <li th:each="stock : ${stocks}">
                 <h3 th:text="${stock.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${stock.library.address}"></h3>
                 <p th:text="${stock.quantity}"></p>
-                <!--<form th:unless="${authentication.equals('anonymousUser')}">
-                    <input type="submit" class="btn btn-outline-secondary" th:href="@{/loan/new(libraryId=${stock.library.numberRef})}" value="Réservez" />
-                </form>-->
                 <a class="btn btn-outline-secondary" th:unless="${authentication.equals('anonymousUser')}" th:href="@{/loan/new(libraryId=${stock.library.numberRef}, bookReference=${book.reference})}">Réservez</a>
             </li>
         </ul>

@@ -6,7 +6,8 @@
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#personal-data">Informations personnelles</a></li>
-            <li><a data-toggle="tab" href="#loan">Emprunt</a></li>
+            <li><a data-toggle="tab" href="#current-loan">Livres empruntés</a></li>
+            <li><a data-toggle="tab" href="#returned-loan">Livres rendus</a></li>
         </ul>
 
         <div class="tab-content">
@@ -31,9 +32,53 @@
                     <input type="submit" />
                 </form>
             </div>
-            <div id="loan" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <div id="current-loan" class="tab-pane fade">
+                <h3>Current loan</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Library</th>
+                            <th>Quantity</th>
+                            <th>Expiry Date</th>
+                            <th>Status</th>
+                            <th>Buttons</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="loan: ${loans}" th:unless="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
+                            <td th:text="${loan.book.title}"></td>
+                            <td th:text="${loan.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${loan.library.address}"></td>
+                            <td th:text="${loan.quantity}"></td>
+                            <td th:text="${loan.expiryDate}"></td>
+                            <td th:text="${loan.status}"></td>
+                            <td>Buttons</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div id="returned-loan" class="tab-pane fade">
+                <h3>Returned loan</h3>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Library</th>
+                        <th>Quantity</th>
+                        <th>Borrowing Date</th>
+                        <th>Expiry Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="loan: ${loans}" th:if="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
+                            <td th:text="${loan.book.title}"></td>
+                            <td th:text="${loan.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${loan.library.address}"></td>
+                            <td th:text="${loan.quantity}"></td>
+                            <td th:text="${loan.borrowingDate}"></td>
+                            <td th:text="${loan.expiryDate}"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -69,6 +114,12 @@
         function editOrCancel() {
             toggleEditButton();
             toggleInput();
+        }
+    </script>
+    <script type="text/javascript" th:inline="javascript">
+        function getBookDetailView(reference) {
+            let baseLink = /*[[@{/book-detail/}]]*/'';
+            location.href = baseLink + reference;
         }
     </script>
 </body>

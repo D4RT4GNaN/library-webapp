@@ -99,8 +99,10 @@ public class UsagerController extends AbstractController {
     // ==================== Parameter Methods ====================
     @GetMapping("/parameter")
     public String showUsagerParameter(Model model, HttpServletRequest request) {
+        Usager usager = (Usager) getAuthentication().getDetails();
         model.addAttribute("authentication", getAuthentication().getName());
-        model.addAttribute("user", getAuthentication().getDetails());
+        model.addAttribute("user", usager);
+        model.addAttribute("loans", libraryService.getLoansFor(usager.getId()));
         return "parameter";
     }
 
