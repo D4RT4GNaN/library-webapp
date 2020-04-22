@@ -29,146 +29,6 @@ public interface LibraryService {
 
     /**
      * 
-     * @return
-     *     returns java.util.List<generated.libraryservice.Loan>
-     */
-    @WebMethod(operationName = "CheckExpiration", action = "http://LibraryService/CheckExpiration")
-    @WebResult(name = "loansOverdue", targetNamespace = "")
-    @RequestWrapper(localName = "CheckExpiration", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpiration")
-    @ResponseWrapper(localName = "CheckExpirationResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpirationResponse")
-    @Action(input = "http://LibraryService/CheckExpiration", output = "http://LibraryService/LibraryService/CheckExpirationResponse")
-    public List<Loan> checkExpiration();
-
-    /**
-     * 
-     * @param bookReference
-     * @return
-     *     returns java.util.List<generated.libraryservice.Stock>
-     */
-    @WebMethod(action = "http://LibraryService/getBookAvailability")
-    @WebResult(name = "bookAvailability", targetNamespace = "")
-    @RequestWrapper(localName = "getBookAvailability", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailability")
-    @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
-    @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
-    public List<Stock> getBookAvailability(
-        @WebParam(name = "bookReference", targetNamespace = "")
-        String bookReference);
-
-    /**
-     * 
-     * @param libraryId
-     * @param usager
-     * @param bookReference
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "http://LibraryService/addNewLoan")
-    @WebResult(name = "status", targetNamespace = "")
-    @RequestWrapper(localName = "addNewLoan", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddNewLoan")
-    @ResponseWrapper(localName = "addNewLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddNewLoanResponse")
-    @Action(input = "http://LibraryService/addNewLoan", output = "http://LibraryService/LibraryService/addNewLoanResponse")
-    public String addNewLoan(
-        @WebParam(name = "libraryId", targetNamespace = "")
-        int libraryId,
-        @WebParam(name = "bookReference", targetNamespace = "")
-        String bookReference,
-        @WebParam(name = "usager", targetNamespace = "")
-        Usager usager);
-
-    /**
-     * 
-     * @param loan
-     * @return
-     *     returns boolean
-     */
-    @WebMethod(action = "http://LibraryService/extendLoan")
-    @WebResult(name = "extended", targetNamespace = "")
-    @RequestWrapper(localName = "extendLoan", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ExtendLoan")
-    @ResponseWrapper(localName = "extendLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ExtendLoanResponse")
-    @Action(input = "http://LibraryService/extendLoan", output = "http://LibraryService/LibraryService/extendLoanResponse")
-    public boolean extendLoan(
-        @WebParam(name = "loan", targetNamespace = "")
-        Loan loan);
-
-    /**
-     * 
-     * @param libraryId
-     * @param usager
-     * @param borrowingDate
-     * @param bookReference
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "http://LibraryService/returnBook")
-    @WebResult(name = "status", targetNamespace = "")
-    @RequestWrapper(localName = "returnBook", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ReturnBook")
-    @ResponseWrapper(localName = "returnBookResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ReturnBookResponse")
-    @Action(input = "http://LibraryService/returnBook", output = "http://LibraryService/LibraryService/returnBookResponse")
-    public String returnBook(
-        @WebParam(name = "borrowingDate", targetNamespace = "")
-        XMLGregorianCalendar borrowingDate,
-        @WebParam(name = "libraryId", targetNamespace = "")
-        int libraryId,
-        @WebParam(name = "bookReference", targetNamespace = "")
-        String bookReference,
-        @WebParam(name = "usager", targetNamespace = "")
-        Usager usager);
-
-    /**
-     * 
-     * @param bookReference
-     * @param userID
-     * @return
-     *     returns java.lang.String
-     */
-    @WebMethod(action = "http://LibraryService/getStatusLoan")
-    @WebResult(name = "status", targetNamespace = "")
-    @RequestWrapper(localName = "getStatusLoan", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetStatusLoan")
-    @ResponseWrapper(localName = "getStatusLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetStatusLoanResponse")
-    @Action(input = "http://LibraryService/getStatusLoan", output = "http://LibraryService/LibraryService/getStatusLoanResponse")
-    public String getStatusLoan(
-        @WebParam(name = "bookReference", targetNamespace = "")
-        String bookReference,
-        @WebParam(name = "userID", targetNamespace = "")
-        int userID);
-
-    /**
-     * 
-     * @param keyword
-     * @return
-     *     returns java.util.List<generated.libraryservice.Book>
-     */
-    @WebMethod(action = "http://LibraryService/getBooksWithKeyword")
-    @WebResult(name = "listBooks", targetNamespace = "")
-    @RequestWrapper(localName = "getBooksWithKeyword", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBooksWithKeyword")
-    @ResponseWrapper(localName = "getBooksWithKeywordResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBooksWithKeywordResponse")
-    @Action(input = "http://LibraryService/getBooksWithKeyword", output = "http://LibraryService/LibraryService/getBooksWithKeywordResponse")
-    public List<Book> getBooksWithKeyword(
-        @WebParam(name = "keyword", targetNamespace = "")
-        String keyword);
-
-    /**
-     * 
-     * @param generatedUsager
-     * @return
-     *     returns java.lang.String
-     * @throws RegisterException
-     */
-    @WebMethod(action = "http://LibraryService/addUser")
-    @WebResult(name = "status", targetNamespace = "")
-    @RequestWrapper(localName = "addUser", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUser")
-    @ResponseWrapper(localName = "addUserResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUserResponse")
-    @Action(input = "http://LibraryService/addUser", output = "http://LibraryService/LibraryService/addUserResponse", fault = {
-        @FaultAction(className = RegisterException.class, value = "http://LibraryService/LibraryService/addUser/Fault/RegisterException")
-    })
-    public String addUser(
-        @WebParam(name = "generatedUsager", targetNamespace = "")
-        Usager generatedUsager)
-        throws RegisterException
-    ;
-
-    /**
-     * 
      * @param identifier
      * @param password
      * @return
@@ -324,5 +184,145 @@ public interface LibraryService {
     public List<Loan> getLoansFor(
         @WebParam(name = "userID", targetNamespace = "")
         int userID);
+
+    /**
+     * 
+     * @return
+     *     returns java.util.List<generated.libraryservice.Loan>
+     */
+    @WebMethod(operationName = "CheckExpiration", action = "http://LibraryService/CheckExpiration")
+    @WebResult(name = "loansOverdue", targetNamespace = "")
+    @RequestWrapper(localName = "CheckExpiration", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpiration")
+    @ResponseWrapper(localName = "CheckExpirationResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.CheckExpirationResponse")
+    @Action(input = "http://LibraryService/CheckExpiration", output = "http://LibraryService/LibraryService/CheckExpirationResponse")
+    public List<Loan> checkExpiration();
+
+    /**
+     * 
+     * @param bookReference
+     * @return
+     *     returns java.util.List<generated.libraryservice.Stock>
+     */
+    @WebMethod(action = "http://LibraryService/getBookAvailability")
+    @WebResult(name = "bookAvailability", targetNamespace = "")
+    @RequestWrapper(localName = "getBookAvailability", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailability")
+    @ResponseWrapper(localName = "getBookAvailabilityResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBookAvailabilityResponse")
+    @Action(input = "http://LibraryService/getBookAvailability", output = "http://LibraryService/LibraryService/getBookAvailabilityResponse")
+    public List<Stock> getBookAvailability(
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference);
+
+    /**
+     * 
+     * @param libraryId
+     * @param usager
+     * @param bookReference
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "http://LibraryService/addNewLoan")
+    @WebResult(name = "status", targetNamespace = "")
+    @RequestWrapper(localName = "addNewLoan", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddNewLoan")
+    @ResponseWrapper(localName = "addNewLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddNewLoanResponse")
+    @Action(input = "http://LibraryService/addNewLoan", output = "http://LibraryService/LibraryService/addNewLoanResponse")
+    public String addNewLoan(
+        @WebParam(name = "libraryId", targetNamespace = "")
+        int libraryId,
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference,
+        @WebParam(name = "usager", targetNamespace = "")
+        Usager usager);
+
+    /**
+     * 
+     * @param loan
+     * @return
+     *     returns boolean
+     */
+    @WebMethod(action = "http://LibraryService/extendLoan")
+    @WebResult(name = "extended", targetNamespace = "")
+    @RequestWrapper(localName = "extendLoan", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ExtendLoan")
+    @ResponseWrapper(localName = "extendLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ExtendLoanResponse")
+    @Action(input = "http://LibraryService/extendLoan", output = "http://LibraryService/LibraryService/extendLoanResponse")
+    public boolean extendLoan(
+        @WebParam(name = "loan", targetNamespace = "")
+        Loan loan);
+
+    /**
+     * 
+     * @param libraryId
+     * @param usager
+     * @param borrowingDate
+     * @param bookReference
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "http://LibraryService/returnBook")
+    @WebResult(name = "status", targetNamespace = "")
+    @RequestWrapper(localName = "returnBook", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ReturnBook")
+    @ResponseWrapper(localName = "returnBookResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.ReturnBookResponse")
+    @Action(input = "http://LibraryService/returnBook", output = "http://LibraryService/LibraryService/returnBookResponse")
+    public String returnBook(
+        @WebParam(name = "borrowingDate", targetNamespace = "")
+        XMLGregorianCalendar borrowingDate,
+        @WebParam(name = "libraryId", targetNamespace = "")
+        int libraryId,
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference,
+        @WebParam(name = "usager", targetNamespace = "")
+        Usager usager);
+
+    /**
+     * 
+     * @param bookReference
+     * @param userID
+     * @return
+     *     returns java.lang.String
+     */
+    @WebMethod(action = "http://LibraryService/getStatusLoan")
+    @WebResult(name = "status", targetNamespace = "")
+    @RequestWrapper(localName = "getStatusLoan", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetStatusLoan")
+    @ResponseWrapper(localName = "getStatusLoanResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetStatusLoanResponse")
+    @Action(input = "http://LibraryService/getStatusLoan", output = "http://LibraryService/LibraryService/getStatusLoanResponse")
+    public String getStatusLoan(
+        @WebParam(name = "bookReference", targetNamespace = "")
+        String bookReference,
+        @WebParam(name = "userID", targetNamespace = "")
+        int userID);
+
+    /**
+     * 
+     * @param keyword
+     * @return
+     *     returns java.util.List<generated.libraryservice.Book>
+     */
+    @WebMethod(action = "http://LibraryService/getBooksWithKeyword")
+    @WebResult(name = "listBooks", targetNamespace = "")
+    @RequestWrapper(localName = "getBooksWithKeyword", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBooksWithKeyword")
+    @ResponseWrapper(localName = "getBooksWithKeywordResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.GetBooksWithKeywordResponse")
+    @Action(input = "http://LibraryService/getBooksWithKeyword", output = "http://LibraryService/LibraryService/getBooksWithKeywordResponse")
+    public List<Book> getBooksWithKeyword(
+        @WebParam(name = "keyword", targetNamespace = "")
+        String keyword);
+
+    /**
+     * 
+     * @param generatedUsager
+     * @return
+     *     returns java.lang.String
+     * @throws RegisterException
+     */
+    @WebMethod(action = "http://LibraryService/addUser")
+    @WebResult(name = "status", targetNamespace = "")
+    @RequestWrapper(localName = "addUser", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUser")
+    @ResponseWrapper(localName = "addUserResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddUserResponse")
+    @Action(input = "http://LibraryService/addUser", output = "http://LibraryService/LibraryService/addUserResponse", fault = {
+        @FaultAction(className = RegisterException.class, value = "http://LibraryService/LibraryService/addUser/Fault/RegisterException")
+    })
+    public String addUser(
+        @WebParam(name = "generatedUsager", targetNamespace = "")
+        Usager generatedUsager)
+        throws RegisterException
+    ;
 
 }

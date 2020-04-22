@@ -52,7 +52,16 @@
                             <td th:text="${loan.quantity}"></td>
                             <td th:text="${loan.expiryDate}"></td>
                             <td th:text="${loan.status}"></td>
-                            <td>Buttons</td>
+                            <td>
+                                <a class="btn btn-outline-secondary"
+                                   th:href="@{/loan/return(
+                                        libraryId=${loan.library.numberRef},
+                                        bookReference=${loan.book.reference},
+                                        borrowingDate=${loan.borrowingDate}
+                                   )}">
+                                    Return
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
