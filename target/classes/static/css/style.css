@@ -9,3 +9,17 @@
     white-space: normal;
     width: 250px;
 }
+
+.comment{
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+.head{
+    margin-bottom: 10px;
+}
+
+.user{
+    margin-right: 10px;
+}
