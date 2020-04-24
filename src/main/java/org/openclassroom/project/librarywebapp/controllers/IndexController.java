@@ -1,15 +1,13 @@
 package org.openclassroom.project.librarywebapp.controllers;
 
 import generated.libraryservice.Book;
+import generated.libraryservice.Comment;
 import generated.libraryservice.Usager;
 import org.openclassroom.project.librarywebapp.utils.Utils;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -39,7 +37,7 @@ public class IndexController extends AbstractController {
 
     // ==================== Book Detail Method ====================
     @GetMapping("/book-detail/{reference}")
-    public String showBookDetail(Model model, @PathVariable String reference, @ModelAttribute("user")Usager usager, @ModelAttribute("errorMessage")String message, HttpServletRequest request) {
+    public String showBookDetail(Model model, @PathVariable String reference, @ModelAttribute("errorMessage")String message, @ModelAttribute("user")Usager usager, HttpServletRequest request) {
         model.addAttribute("authentication", getAuthentication().getName());
         model.addAttribute("user", usager);
         model.addAttribute("book", libraryService.getBooksWithKeyword(reference).get(0));
@@ -49,8 +47,22 @@ public class IndexController extends AbstractController {
         if (!message.equals("")) { model.addAttribute("errorMessage", message); }
 
         model.addAttribute("stocks", libraryService.getBookAvailability(reference));
+        model.addAttribute("newComment", new Comment());
 
         return "book-detail";
+    }
+
+
+
+    // ==================== Comment Method ====================
+    @PostMapping("/book-detail/{reference}/comment")
+    public String commentBook(@PathVariable String reference, @ModelAttribute Comment comment) {
+        comment.setAuthor((Usager) getAuthentication().getDetails());
+        comment.setBookReference(reference);
+
+        libraryService.addComment(comment);
+
+        return "redirect:/book-detail/" + reference;
     }
 
 

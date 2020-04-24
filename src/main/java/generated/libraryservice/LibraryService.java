@@ -29,6 +29,18 @@ public interface LibraryService {
 
     /**
      * 
+     * @param comment
+     */
+    @WebMethod(operationName = "AddComment", action = "http://LibraryService/AddComment")
+    @RequestWrapper(localName = "AddComment", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddComment")
+    @ResponseWrapper(localName = "AddCommentResponse", targetNamespace = "http://LibraryService/", className = "generated.libraryservice.AddCommentResponse")
+    @Action(input = "http://LibraryService/AddComment", output = "http://LibraryService/LibraryService/AddCommentResponse")
+    public void addComment(
+        @WebParam(name = "comment", targetNamespace = "")
+        Comment comment);
+
+    /**
+     * 
      * @param bookReference
      * @return
      *     returns java.util.List<generated.libraryservice.Stock>

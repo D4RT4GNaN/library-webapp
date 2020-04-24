@@ -40,11 +40,12 @@
 
     <section id="comments" class="container">
         <div class="row">
-            <h2>Comments <div class="pull-right"><a href="#" id="addacomment" class="btn btn-primary">Add a coment</a> </div></h2>
+            <h2>Comments <div th:unless="${authentication.equals('anonymousUser')}" class="pull-right"><a href="#" id="addacomment" class="btn btn-primary">Add a coment</a> </div></h2>
         </div>
-        <div class="row" id="addcomment" style="display: none;">
-            <form>
-                <textarea class="form-control" placeholder="Comment content..."></textarea><br/>
+        <div th:unless="${authentication.equals('anonymousUser')}" class="row" id="addcomment" style="display: none;">
+            <form th:action="@{/book-detail/{reference}/comment(reference=${reference})}" th:object="${newComment}" method="post">
+                <input type="text" placeholder="title ..." th:field="*{title}" />
+                <textarea class="form-control" placeholder="Comment content..." th:field="*{content}"></textarea><br/>
                 <button class="btn btn-primary">Send</button>
             </form>
         </div>
@@ -64,5 +65,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
 <script th:src="@{/js/modal-account.js}" type="text/javascript"></script>
 <script th:src="@{/js/form-validating.js}" type="text/javascript"></script>
+<script>
+    $(document).on('click', '#addacomment', function(){
+        $('#addcomment').toggle();
+    });
+</script>
 </body>
 </html>
