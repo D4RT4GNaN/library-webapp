@@ -1,0 +1,304 @@
+<div xmlns:th="http://www.thymeleaf.org" id="loader" th:fragment="logo-animation">
+    <svg class="shadow" enable-background="new 0 0 800 800" height="800px" id="GUIDE" version="1.1" viewBox="0 0 800 800" width="800px"
+         xml:space="preserve"
+         xmlns="http://www.w3.org/2000/svg">
+        <defs>
+            <filter id="inset-shadow" x="-50%" y="-50%" width="200%" height="200%">
+                <feComponentTransfer in="SourceAlpha">
+                    <feFuncA type="table" tableValues="1 0" />
+                </feComponentTransfer>
+                <feGaussianBlur stdDeviation="3"/>
+                <feOffset dx="5" dy="5" result="offsetblur"/>
+                <feFlood flood-color="rgb(20, 0, 0)" result="color"/>
+                <feComposite in2="offsetblur" operator="in"/>
+                <feComposite in2="SourceAlpha" operator="in" />
+                <feComponentTransfer id="test">
+                    <feFuncA type="linear" slope="1">
+                        <animate attributeType="XML" attributeName="slope" from="0" to="1" dur="5s"/>
+                    </feFuncA>
+                </feComponentTransfer>
+                <feMerge>
+                    <feMergeNode in="SourceGraphic" />
+                    <feMergeNode />
+                </feMerge>
+            </filter>
+
+            <style type="text/css">
+                :root {
+                    --icon-color: #c8ad7f;
+                    --icon-fill: #40331c;
+                }
+
+                .shadow {
+                    animation: shadowAnimation 5s running linear;
+                }
+
+                @keyframes shadowAnimation {
+                    0% {
+                        -webkit-filter: none;
+                        filter: none;
+                    }
+
+                    75% {
+                        -webkit-filter: none;
+                        filter: none;
+                    }
+
+                    76% {
+                        -webkit-filter: url("#inset-shadow");
+                        filter: url("#inset-shadow");
+                    }
+
+                    100% {
+                        -webkit-filter: url("#inset-shadow");
+                        filter: url("#inset-shadow");
+                    }
+                }
+
+                /* ===== Path 1 ===== */
+                #path1 {
+                    stroke-dasharray: var(--path1-length);
+                    animation: path1 5s running linear;
+                }
+
+                @keyframes path1 {
+                    0% {
+                        stroke-dashoffset: var(--path1-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 2 ===== */
+                #path2 {
+                    stroke-dasharray: var(--path2-length);
+                    animation: path2 5s running linear;
+                }
+
+                @keyframes path2 {
+                    0% {
+                        stroke-dashoffset: var(--path2-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 3 ===== */
+                #path3 {
+                    stroke-dasharray: var(--path3-length);
+                    animation: path3 5s running linear;
+                }
+
+                @keyframes path3 {
+                    0% {
+                        stroke-dashoffset: var(--path3-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 4 ===== */
+                #path4 {
+                    stroke-dasharray: var(--path4-length);
+                    animation: path4 5s running linear;
+                }
+
+                @keyframes path4 {
+                    0% {
+                        stroke-dashoffset: var(--path4-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 5 ===== */
+                #path5 {
+                    stroke-dasharray: var(--path5-length);
+                    animation: path5 5s running linear;
+                }
+
+                @keyframes path5 {
+                    0% {
+                        stroke-dashoffset: var(--path5-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 6 ===== */
+                #path6 {
+                    stroke-dasharray: var(--path6-length);
+                    animation: path6 5s running linear;
+                }
+
+                @keyframes path6 {
+                    0% {
+                        stroke-dashoffset: var(--path6-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 7 ===== */
+                #path7 {
+                    stroke-dasharray: var(--path7-length);
+                    animation: path7 5s running linear;
+                }
+
+                @keyframes path7 {
+                    0% {
+                        stroke-dashoffset: var(--path7-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+                /* ===== Path 8 ===== */
+                #path8 {
+                    stroke-dasharray: var(--path8-length);
+                    animation: path8 5s running linear;
+                }
+
+                @keyframes path8 {
+                    0% {
+                        stroke-dashoffset: var(--path8-length);
+                        fill: var(--icon-fill);
+                    }
+
+                    75% {
+                        stroke-dashoffset: 0;
+                    }
+
+                    76% {
+                        fill: var(--icon-fill);
+                    }
+
+                    100% {
+                        fill: var(--icon-color);
+                    }
+                }
+
+            </style>
+        </defs>
+
+        <g>
+            <g>
+                <path id="path1" class="icon-path" d="M584.443,776.578H231.615c-50.608,0-91.781-41.174-91.781-91.783V254.301c0-11.046,8.954-20,20-20s20,8.954,20,20v430.494    c0,28.554,23.229,51.783,51.781,51.783h352.829c19.697,0,35.723-16.024,35.723-35.723V266.312    c0-19.697-16.023-35.722-35.721-35.722H243.418c-57.117,0-103.585-46.468-103.585-103.584S186.301,23.422,243.418,23.422    l332.593,0.013c11.047,0.001,20,8.955,20,20.001c0,11.045-8.955,19.999-20,19.999l0,0l-332.594-0.013    c-35.06,0-63.584,28.523-63.584,63.584s28.524,63.584,63.585,63.584h341.027c41.754,0,75.721,33.969,75.721,75.722v434.544    C660.166,742.609,626.197,776.578,584.443,776.578z"/>
+            </g>
+            <g>
+                <path id="path2" class="icon-path" d="M640.166,63.438h-3.322c-11.045,0-20-8.954-20-20s8.955-20,20-20h3.322c11.047,0,20,8.954,20,20    S651.213,63.438,640.166,63.438z"/>
+            </g>
+            <g>
+                <path id="path3" class="icon-path" d="M556.063,679.967H243.935c-11.046,0-20-8.954-20-20v-352.77c0-11.046,8.954-20,20-20h312.127c11.047,0,20,8.954,20,20    s-8.953,20-20,20H263.935v312.77h272.127V376.5c0-11.046,8.955-20,20-20c11.047,0,20,8.954,20,20v283.467    C576.063,671.013,567.109,679.967,556.063,679.967z"/>
+            </g>
+            <g>
+                <path id="path4" class="icon-path" d="M472.689,413.792h-145.38c-11.046,0-20-8.954-20-20s8.954-20,20-20h145.38c11.047,0,20,8.954,20,20    S483.736,413.792,472.689,413.792z"/>
+            </g>
+            <g>
+                <path id="path5" class="icon-path" d="M472.689,503.583h-145.38c-11.046,0-20-8.954-20-20s8.954-20,20-20h145.38c11.047,0,20,8.954,20,20    S483.736,503.583,472.689,503.583z"/>
+            </g>
+            <g>
+                <path id="path6" class="icon-path" d="M472.689,593.372h-145.38c-11.046,0-20-8.954-20-20s8.954-20,20-20h145.38c11.047,0,20,8.954,20,20    S483.736,593.372,472.689,593.372z"/>
+            </g>
+            <g>
+                <path id="path7" class="icon-path" d="M556.791,147.006H308.09c-11.046,0-20-8.954-20-20s8.954-20,20-20h248.701c11.047,0,20,8.954,20,20    S567.838,147.006,556.791,147.006z"/>
+            </g>
+            <g>
+                <path id="path8" class="icon-path" d="M247.257,147.006h-3.322c-11.046,0-20-8.954-20-20s8.954-20,20-20h3.322c11.046,0,20,8.954,20,20    S258.303,147.006,247.257,147.006z"/>
+            </g>
+        </g>
+
+        <script type="text/javascript">
+            function getLength(pathId) {
+                let path = document.getElementById(pathId);
+                return path.getTotalLength();
+            }
+
+            document.documentElement.style.setProperty('--path1-length', getLength('path1'));
+            document.documentElement.style.setProperty('--path2-length', getLength('path2'));
+            document.documentElement.style.setProperty('--path3-length', getLength('path3'));
+            document.documentElement.style.setProperty('--path4-length', getLength('path4'));
+            document.documentElement.style.setProperty('--path5-length', getLength('path5'));
+            document.documentElement.style.setProperty('--path6-length', getLength('path6'));
+            document.documentElement.style.setProperty('--path7-length', getLength('path7'));
+            document.documentElement.style.setProperty('--path8-length', getLength('path8'));
+        </script>
+    </svg>
+</div>

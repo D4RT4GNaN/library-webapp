@@ -1,0 +1,25 @@
+.slider {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.slider-item {
+    display: inline-block;
+    margin: 0 10px 0 10px;
+    white-space: normal;
+    width: 250px;
+}
+
+.comment{
+    margin-right: 20px;
+    margin-left: 20px;
+    margin-bottom: 30px;
+}
+
+.head{
+    margin-bottom: 10px;
+}
+
+.user{
+    margin-right: 10px;
+}

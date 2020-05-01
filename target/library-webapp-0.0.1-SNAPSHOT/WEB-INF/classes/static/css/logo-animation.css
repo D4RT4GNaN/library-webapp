@@ -1,0 +1,230 @@
+:root {
+    --icon-color: #c8ad7f;
+    --icon-fill: #40331c;
+}
+
+.shadow {
+    animation: shadowAnimation 5s running linear;
+}
+
+@keyframes shadowAnimation {
+    0% {
+        -webkit-filter: none;
+        filter: none;
+    }
+
+    75% {
+        -webkit-filter: none;
+        filter: none;
+    }
+
+    76% {
+        -webkit-filter: url("#inset-shadow");
+        filter: url("#inset-shadow");
+    }
+
+    100% {
+        -webkit-filter: url("#inset-shadow");
+        filter: url("#inset-shadow");
+    }
+}
+
+/* ===== Path 1 ===== */
+#path1 {
+    stroke-dasharray: var(--path1-length);
+    animation: path1 5s running linear;
+}
+
+@keyframes path1 {
+    0% {
+        stroke-dashoffset: var(--path1-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 2 ===== */
+#path2 {
+    stroke-dasharray: var(--path2-length);
+    animation: path2 5s running linear;
+}
+
+@keyframes path2 {
+    0% {
+        stroke-dashoffset: var(--path2-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 3 ===== */
+#path3 {
+    stroke-dasharray: var(--path3-length);
+    animation: path3 5s running linear;
+}
+
+@keyframes path3 {
+    0% {
+        stroke-dashoffset: var(--path3-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 4 ===== */
+#path4 {
+    stroke-dasharray: var(--path4-length);
+    animation: path4 5s running linear;
+}
+
+@keyframes path4 {
+    0% {
+        stroke-dashoffset: var(--path4-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 5 ===== */
+#path5 {
+    stroke-dasharray: var(--path5-length);
+    animation: path5 5s running linear;
+}
+
+@keyframes path5 {
+    0% {
+        stroke-dashoffset: var(--path5-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 6 ===== */
+#path6 {
+    stroke-dasharray: var(--path6-length);
+    animation: path6 5s running linear;
+}
+
+@keyframes path6 {
+    0% {
+        stroke-dashoffset: var(--path6-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 7 ===== */
+#path7 {
+    stroke-dasharray: var(--path7-length);
+    animation: path7 5s running linear;
+}
+
+@keyframes path7 {
+    0% {
+        stroke-dashoffset: var(--path7-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}
+
+/* ===== Path 8 ===== */
+#path8 {
+    stroke-dasharray: var(--path8-length);
+    animation: path8 5s running linear;
+}
+
+@keyframes path8 {
+    0% {
+        stroke-dashoffset: var(--path8-length);
+        fill: var(--icon-fill);
+    }
+
+    75% {
+        stroke-dashoffset: 0;
+    }
+
+    76% {
+        fill: var(--icon-fill);
+    }
+
+    100% {
+        fill: var(--icon-color);
+    }
+}

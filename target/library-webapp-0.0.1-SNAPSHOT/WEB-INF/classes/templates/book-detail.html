@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/structure/head :: head"></head>
+<body>
+<header th:replace="fragments/structure/header :: header"></header>
+<div class="container">
+    <section th:replace="fragments/objects/book :: 3d-book"></section>
+
+    <section id="informations">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Title :</td> <td th:text="${book.title}"></td>
+                </tr>
+                <tr>
+                    <td>Category :</td> <td th:text="${book.category}"></td>
+                </tr>
+                <tr>
+                    <td>Reference :</td> <td th:text="${book.reference}"></td>
+                </tr>
+                <tr>
+                    <td>Publisher :</td> <td th:text="${book.publisher}"></td>
+                </tr>
+                <tr>
+                    <td>Language</td> <td th:text="${book.language}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="disponibility">
+        <ul>
+            <li th:each="stock : ${stocks}">
+                <h3 th:text="${stock.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${stock.library.address}"></h3>
+                <p th:text="${stock.quantity}"></p>
+                <a class="btn btn-outline-secondary" th:unless="${authentication.equals('anonymousUser')}" th:href="@{/loan/new(libraryId=${stock.library.numberRef}, bookReference=${book.reference})}">Réservez</a>
+            </li>
+        </ul>
+    </section>
+
+    <section id="comments" class="container">
+        <div class="row">
+            <h2>Comments <div th:unless="${authentication.equals('anonymousUser')}" class="pull-right"><a href="#" id="addacomment" class="btn btn-primary">Add a coment</a> </div></h2>
+        </div>
+        <div th:unless="${authentication.equals('anonymousUser')}" class="row" id="addcomment" style="display: none;">
+            <form th:action="@{/book-detail/{reference}/comment(reference=${reference})}" th:object="${newComment}" method="post">
+                <input type="text" placeholder="title ..." th:field="*{title}" />
+                <textarea class="form-control" placeholder="Comment content..." th:field="*{content}"></textarea><br/>
+                <button class="btn btn-primary">Send</button>
+            </form>
+        </div>
+        <div class="row comment" th:each="comment : ${book.comments}">
+            <div class="head">
+                <small><strong class='user' th:text="${comment.author.firstname + ' ' + comment.author.lastname}"></strong> <span th:text="${comment.date}"></span></small>
+            </div>
+            <p th:text="${comment.title}"></p>
+            <p th:text="${comment.content}"></p>
+        </div>
+    </section>
+</div>
+
+<!-- th replace modal -->
+<div th:replace="fragments/modal/modal-account :: modal-account"></div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
+<script th:src="@{/js/modal-account.js}" type="text/javascript"></script>
+<script th:src="@{/js/form-validating.js}" type="text/javascript"></script>
+<script>
+    $(document).on('click', '#addacomment', function(){
+        $('#addcomment').toggle();
+    });
+</script>
+</body>
+</html>
