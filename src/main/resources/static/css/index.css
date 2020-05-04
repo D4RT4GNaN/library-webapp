@@ -114,14 +114,16 @@ body {
 
 }
 
-.fa-sign-out-alt {
+.fa-sign-out-alt, .connect-button, #nav-username {
     color: rgba(0, 0, 0, .5);
+    text-decoration: none;
     -webkit-transition: color 0.3s ease-out;
     transition: color 0.3s ease-out;
 }
 
-.fa-sign-out-alt:hover {
+.fa-sign-out-alt:hover, .connect-button:hover {
     color: #c8ad7f;
+    text-decoration: none;
     -webkit-transition: color 0.3s ease-out;
     transition: color 0.3s ease-out;
 }

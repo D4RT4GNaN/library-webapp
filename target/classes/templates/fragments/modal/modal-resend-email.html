@@ -10,18 +10,18 @@
     <!-- ----- BODY ----- -->
     <div class="modal-body">
         <form th:action="@{/usager/resend-confirm-email}" method="post">
-            <div th:if="${#httpServletRequest.getParameter('emailSendingError') != null}" th:text="${errorMessage}"></div>
+            <div class="error-message" th:if="${#httpServletRequest.getParameter('emailSendingError') != null}" th:text="${errorMessage}"></div>
             <!-- email -->
             <div class="input-group form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" name="email" class="form-control" placeholder="Email">
+                <input type="text" name="email" class="form-control input-brown" placeholder="Email">
             </div>
 
             <!-- submit -->
-            <div class="form-group">
-                <input type="submit" name="submit" value="Envoyez" class="btn float-right login_btn">
+            <div class="d-flex justify-content-center">
+                <input type="submit" name="submit" value="Envoyez" class="btn btn-outline-lightbrown">
             </div>
 
             <!-- protection against Cross-Site Request Forgery attacks -->
@@ -30,9 +30,9 @@
     </div>
 
     <!-- ----- FOOTER ----- -->
-    <div class="modal-footer">
-        <div class="d-flex justify-content-center">
-            Already have an account ? <a href="javascript: showLoginForm();" id="login-link">Login</a>
+    <div class="modal-footer flex-column footer-font-size">
+        <div>
+            Already have an account ? <a href="javascript: showLoginForm();" id="login-link" class="custom-modal-link">Login</a>
         </div>
     </div>
 </div>
