@@ -9,7 +9,7 @@
 
     <!-- ----- BODY ----- -->
     <div class="modal-body">
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}" method="post" name="loginForm">
             <div class="error-message" th:if="${#httpServletRequest.getParameter('loginError') != null}" th:text="${errorMessage}"></div>
             <!-- username -->
             <div class="input-group form-group">
@@ -46,5 +46,19 @@
             <a href="javascript: showForgotPasswordForm();" class="custom-modal-link">Forgot your password ?</a>
         </div>
     </div>
+
+    <script>
+        $('input[type=submit]').click(function(e) {
+            alert('test');
+            e.preventDefault();
+
+            jQuery.post(
+                'login',
+                function(data) {
+                    $('#navbar').load(document.URL + ' #navbar');
+                    alert(data);
+                });
+        });
+    </script>
 </div>
 

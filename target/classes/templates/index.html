@@ -26,7 +26,7 @@
         </div>
 
         <div id="content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top container-fluid">
+            <nav id="navbar" class="navbar navbar-expand-lg navbar-light fixed-top container-fluid">
                 <a id="logo" class="navbar-brand col-3" href="/">
                     <div th:replace="fragments/svg/logo :: logo"></div>
                 </a>
@@ -69,12 +69,9 @@
             <div id="coverflow" class="my-flipster">
                 <span class="ground"></span>
                 <ul id="itemContainer">
-                    <!-- Premier Livre -->
                     <li th:each="book : ${books}" th:id="${book.reference}" onclick="getBookDetailView(this.id)" class="itemSelector">
-                        <figure class='book' th:object="${book}">
-
+                        <figure class='book' th:object="${book}" >
                             <!-- Front -->
-
                             <ul class='book_ul hardcover_front'>
                                 <li>
                                     <div class="coverDesign brown">
@@ -86,7 +83,6 @@
                             </ul>
 
                             <!-- Pages -->
-
                             <ul class='book_ul page'>
                                 <li></li>
                                 <li>
@@ -98,7 +94,6 @@
                             </ul>
 
                             <!-- Back -->
-
                             <ul class='book_ul hardcover_back'>
                                 <li></li>
                                 <li></li>
@@ -145,6 +140,13 @@
                     function getBookDetailView(reference) {
                         let baseLink = /*[[@{/book-detail/}]]*/'';
                         location.href = baseLink + reference;
+                    }
+
+                    function getParameter() {
+                        let itemContainer = $('#itemContainer');
+                        itemContainer.empty();
+                        itemContainer.load('/parameter-fragment/');
+                        $('.my-flipster').flipster('index');
                     }
                 </script>
             </footer>

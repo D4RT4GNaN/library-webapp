@@ -1,0 +1,23 @@
+<div id="returned-loan" th:fragment="returned-book">
+    <h3>Returned loan</h3>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Library</th>
+            <th>Quantity</th>
+            <th>Borrowing Date</th>
+            <th>Expiry Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="loan: ${loans}" th:if="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
+            <td th:text="${loan.book.title}"></td>
+            <td th:text="${loan.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${loan.library.address}"></td>
+            <td th:text="${loan.quantity}"></td>
+            <td th:text="${loan.borrowingDate}"></td>
+            <td th:text="${loan.expiryDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

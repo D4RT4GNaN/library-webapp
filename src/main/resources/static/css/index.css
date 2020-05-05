@@ -155,3 +155,32 @@ body {
 .bg-input::placeholder {
     color: var(--light);
 }
+
+.form-control:disabled, .form-control[readonly] {
+    background-color: #c8ad7f;
+}
+
+.title {
+    margin-bottom: 1.5rem;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    color: #c8ad7f;
+}
+
+.title a {
+    color: rgba(0, 0, 0, .5);
+    font-size: medium;
+    text-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    margin-left: 1em;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.title a:hover {
+    color: #c8ad7f;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#parameter-body {
+    background-image: radial-gradient(#c8ad7f, #493c24 80%);
+}

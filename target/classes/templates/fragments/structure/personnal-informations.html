@@ -1,0 +1,48 @@
+<div id="personal-data" th:fragment="personnal-informations">
+    <h3 class="title">
+        Informations Personnelles
+        <a href="javascript: editOrCancel();">
+            <i id="edit-button" class="fas fa-edit"></i>
+        </a>
+    </h3>
+    <form id="personal-data-form" th:object="${user}" th:action="@{/usager/update-user}" method="post">
+        <input type="text" th:field="*{firstname}" class="personal-data-input form-control bg-input mb-3" readonly />
+        <input type="text" th:field="*{lastname}" class="personal-data-input form-control bg-input mb-3" readonly />
+        <input type="email" th:field="*{email}" class="personal-data-input form-control bg-input mb-3" readonly />
+        <input type="text" th:field="*{adress}" class="personal-data-input form-control bg-input mb-3" readonly />
+        <input type="hidden" id="personal-data-submit" class="btn btn-outline-lightbrown" />
+    </form>
+
+    <script>
+        function toggleEditButton() {
+            let editButton = document.querySelector("#edit-button");
+            if (editButton.classList.contains("fa-edit")) {
+                editButton.classList.remove("fa-edit");
+                editButton.classList.add("fa-times");
+            } else {
+                editButton.classList.remove("fa-times");
+                editButton.classList.add("fa-edit");
+            }
+        }
+
+        function toggleInput() {
+            $("form#personal-data-form :input[class=personal-data-input]").each(function(){
+                let input = $(this);
+                input.is("[readonly]") ? input.removeAttr("readonly") : input.attr("readonly", "readonly");
+            });
+
+            let submitButton = $('#personal-data-submit');
+            if (submitButton.is("[type=hidden]")) {
+                submitButton.attr("type", "submit");
+            } else {
+                submitButton.attr("type", "hidden");
+                $("#personal-data-form")[0].reset();
+            }
+        }
+
+        function editOrCancel() {
+            toggleEditButton();
+            toggleInput();
+        }
+    </script>
+</div>
