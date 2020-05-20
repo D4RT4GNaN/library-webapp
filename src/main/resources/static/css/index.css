@@ -9,6 +9,11 @@ html, body, #content-wrapper, #coverflow {
 
 html, body {
     overflow: hidden;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
 }
 
 body {
@@ -36,8 +41,8 @@ body {
 }
 
 #logo, #logo svg {
-    height: 20%;
-    width: 20%;
+    height: auto;
+    width: 2.5em;
 }
 
 .ground {
@@ -48,8 +53,8 @@ body {
     left: -50%;
     width: 200%;
     margin: 0 auto;
-    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--dark)), color-stop(60%, var(--light)));
-    background-image: linear-gradient(var(--dark), var(--light) 60%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(var(--dark)), color-stop(60%, #493c24));
+    background-image: linear-gradient(var(--dark), #493c24 60%);
     background-size: 100%;
     -webkit-transform-origin: 50% 100%;
     transform-origin: 50% 100%;
@@ -69,9 +74,9 @@ body {
 
 /* this contains a radial-gradient, which fakes the watch's dropshadow */
 .ground::before {
-    bottom: 500px;
+    bottom: 115%;
     left: 0;
-    height: 500px;
+    height: 30%;
     background-image: linear-gradient(var(--dark), var(--light));
     transform-origin: 50% 0;
     transform: rotateX(-70deg);
@@ -98,7 +103,7 @@ body {
 }
 
 .fa-cog {
-    color: rgba(0, 0, 0, .5);
+    color: #c8ad7f;
     -webkit-transform:rotate(-90deg);
     transform:rotate(-90deg);
     -webkit-transition: all 0.3s ease-out;
@@ -106,7 +111,7 @@ body {
 }
 
 .fa-cog:hover {
-    color: #c8ad7f;
+    color: rgba(200, 173, 127, .5);
     -webkit-transform:rotate(90deg);
     transform:rotate(90deg);
     -webkit-transition: all 0.3s ease-out;
@@ -115,34 +120,18 @@ body {
 }
 
 .fa-sign-out-alt, .connect-button, #nav-username {
-    color: rgba(0, 0, 0, .5);
-    text-decoration: none;
-    -webkit-transition: color 0.3s ease-out;
-    transition: color 0.3s ease-out;
-}
-
-.fa-sign-out-alt:hover, .connect-button:hover {
     color: #c8ad7f;
     text-decoration: none;
     -webkit-transition: color 0.3s ease-out;
     transition: color 0.3s ease-out;
 }
 
-.btn-outline-brown {
-    color: rgba(0, 0, 0, .5);
-    background-image: none;
-    background-color: transparent;
-    border-color: rgba(0, 0, 0, .5);
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 2));
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-}
-
-.btn-outline-brown:hover {
-    color: rgba(255, 255, 255, .2);
-    background-color: rgba(0, 0, 0, .5);
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
+.fa-sign-out-alt:hover, .connect-button:hover {
+    cursor: pointer;
+    color: rgba(200, 173, 127, .5);
+    text-decoration: none;
+    -webkit-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
 }
 
 .bg-input, .bg-input:focus {
@@ -181,6 +170,359 @@ body {
     transition: all 0.3s ease-out;
 }
 
-#parameter-body {
-    background-image: radial-gradient(#c8ad7f, #493c24 80%);
+.nav-parameter, .footer-parameter {
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.nav-parameter fas {
+    color: #c8ad7f;
+}
+
+.footer-parameter {
+    height: 10%;
+    z-index: 100;
+}
+
+#current-loan td{
+    max-width: 20vw;
+}
+
+#paramater .flipster__item {
+    vertical-align: middle;
+}
+
+#current-loan .dataTables_paginate,
+#returned-loan .dataTables_paginate,
+.commentContainer .dataTables_paginate {
+    float: none;
+    text-align: center;
+}
+
+table.dataTable tbody tr {
+    background-color: #c8ad7f;
+}
+
+table.dataTable {
+    border-collapse: collapse;
+}
+
+.table .thead-brown th {
+    color: #c8ad7f;
+    background-color: rgba(0, 0, 0, .5);
+    border-color: transparent;
+}
+
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-top: 1px solid rgba(0, 0, 0, .5);
+}
+
+table {
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+tbody, tbody a {
+    color: var(--dark);
+}
+
+.btn-col:hover {
+    color: #8f887d;
+    text-decoration: none;
+    text-shadow: 0 0 0 rgba(0, 0, 0, .5);
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.cell-centered-content {
+    text-align: center;
+}
+
+#current-loan .dataTables_wrapper .dataTables_paginate .paginate_button {
+    min-width: 0;
+    height: 15px;
+    width: 15px;
+    padding: 0;
+}
+
+#current-loan .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+#current-loan .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: transparent !important;
+    background-color: #c8ad7f !important;
+    border: 1px solid #c8ad7f;
+    border-radius: 50%;
+    background: #c8ad7f;
+}
+
+#current-loan .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: transparent !important;
+    background-color: transparent !important;
+    background: transparent;
+    border: 1px solid #c8ad7f;
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#current-loan .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: transparent !important;
+    background-color: #c8ad7f !important;
+    background: #c8ad7f;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#returned-loan .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: var(--dark) !important;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#returned-loan .dataTables_wrapper .dataTables_paginate .paginate_button:hover,
+.commentContainer .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: #c8ad7f !important;
+    background: transparent !important;
+    border: 0 none;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#returned-loan .dataTables_wrapper .dataTables_paginate .disabled,
+#returned-loan .dataTables_wrapper .dataTables_paginate .disabled:hover,
+.commentContainer .dataTables_wrapper .dataTables_paginate .disabled,
+.commentContainer .dataTables_wrapper .dataTables_paginate .disabled:hover {
+    color: rgba(255, 255, 255, .1) !important;
+}
+
+.book-title {
+    position: relative;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    outline: none;
+}
+
+.book-title:hover {
+    color: #8f887d;
+    text-decoration: none;
+}
+
+.book-title:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5%;
+    bottom: 0;
+    left: 0;
+    margin-top: 1px;
+    background: #8f887d;
+    visibility: hidden;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: .25s linear;
+}
+
+.book-title:hover:before,
+.book-title:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+#description {
+    position: absolute;
+    bottom: 20%;
+    color: #c8ad7f;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+    text-align: center;
+}
+
+#descriptionTitle {
+    font-size: xx-large;
+}
+
+#mark {
+    font-size: x-large;
+}
+
+.fa-chevron-down {
+    position: absolute;
+    bottom: 10%;
+    font-size: xx-large;
+    color: #c8ad7f;
+    animation: 1s ease-in-out infinite alternate chevron;
+}
+
+@keyframes chevron {
+    from { bottom: 10%; }
+    to { bottom: 8%; }
+}
+
+.table-infos th {
+    background-color: var(--dark);
+    border-top: none;
+    color: #c8ad7f;
+}
+
+.table-infos td {
+    background-color: #c8ad7f;
+}
+
+#synopsis {
+    color: #c8ad7f;
+    margin-top: 5%;
+}
+
+.libraryList {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline-start: 0;
+}
+
+.libraryList .listItem {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.libraryList .listItem h3 {
+    font-size: large;
+    text-align: center;
+    color: var(--dark);
+    margin-top: 1em;
+}
+
+.libraryList .listItem div {
+    position: relative;
+    background-color: var(--dark);
+    border-radius: 50%;
+    color: var(--light);
+    height: 10em;
+    width: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 2px 2px 2px rgba(0, 0, 0, .5);
+}
+
+.libraryList .listItem div::before {
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 5em;
+    top: 13%;
+    left: 27%;
+    content: "\f02d";
+    color: #c8ad7f;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
+}
+
+.libraryList .listItem div p {
+    color: var(--light);
+    font-size: large;
+    z-index: 1;
+    background-color: #c8ad7f;
+    width: 30%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.libraryList .listItem a {
+    margin-top: 1em;
+}
+
+section {
+    margin-top: 10%;
+}
+
+#comments * {
+    position: relative;
+    z-index: 1;
+}
+
+#separator {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    background-color: var(--dark);
+    transform: rotate(-7deg);
+    width: 150%;
+    height: 100vh;
+    z-index: 0;
+    box-shadow: 0 -5px 5px rgba(0, 0, 0, .5);
+}
+
+#comments {
+    position: relative;
+    margin-top: 15%;
+    color: #c8ad7f;
+    padding: 0;
+}
+
+#commentContent {
+    background-color: var(--dark);
+    margin: 0;
+    min-height: 100vh;
+}
+#commentsTable thead {
+    display: none;
+}
+
+.contentComment {
+    border: 1px solid var(--dark);
+    border-radius: 10px;
+}
+
+#commentTitle {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#addCommentButton {
+    width: auto!important;
+}
+
+#addCommentForm {
+    display: none;
+}
+
+#addCommentButton:not([href]):not([tabindex]):hover {
+    color: rgba(0, 0, 0, .9);
+}
+
+#commentsTable tbody tr {
+    background-color: transparent;
+}
+
+#commentsTable {
+    box-shadow: none;
+}
+
+.tableRow {
+    margin-top: 1em;
+    padding: 8px 10px;
+    background-color: #c8ad7f;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, .5);
+    border-radius: 10px;
+}
+
+.commentContainer .dataTables_paginate {
+    padding-bottom: 2em;
+}
+
+.commentContainer .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: var(--light) !important;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
 }

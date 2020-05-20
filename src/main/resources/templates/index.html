@@ -7,6 +7,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
         <link th:href="@{/css/modal.css}" rel="stylesheet" type="text/css" />
@@ -17,10 +18,11 @@
         <link th:href="@{/css/logo.css}" rel="stylesheet" type="text/css" />
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script th:src="@{/js/book.js}" type="text/javascript"></script>
     </head>
     <body>
         <div id="loader-wrapper">
-            <div th:replace="fragments/svg/logo-animation :: logo-animation"></div>
+            <div id="logo-animation" th:replace="fragments/svg/logo-animation :: logo-animation"></div>
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
         </div>
@@ -38,7 +40,7 @@
                 <div class="collapse navbar-collapse col-9 row" id="navbarSupportedContent">
                     <form class="form-inline col-9 row" method="get" action="/search">
                         <input class="form-control col-9 mr-2 bg-input" type="search" placeholder="Search" aria-label="Search" name="searchString">
-                        <button class="btn btn-outline-brown col-2" type="submit">Search</button>
+                        <button class="btn btn-outline-lightbrown col-2" type="submit">Search</button>
                     </form>
 
                     <ul th:unless="${authentication.equals('anonymousUser')}" class="navbar-nav my-2 my-lg-0 pr-0 col-3 justify-content-end">
@@ -46,7 +48,7 @@
                             <p id="nav-username" class="mx-2 h-100 my-auto" th:text="${user.firstname}"></p>
                         </li>
                         <li class="nav-item">
-                            <a class="mx-2 h-100 my-auto" href="/usager/parameter">
+                            <a class="mx-2 h-100 my-auto" onclick="showParameter();">
                                 <i class="fas fa-cog"></i>
                             </a>
                         </li>
@@ -68,45 +70,15 @@
 
             <div id="coverflow" class="my-flipster">
                 <span class="ground"></span>
-                <ul id="itemContainer">
-                    <li th:each="book : ${books}" th:id="${book.reference}" onclick="getBookDetailView(this.id)" class="itemSelector">
-                        <figure class='book' th:object="${book}" >
-                            <!-- Front -->
-                            <ul class='book_ul hardcover_front'>
-                                <li>
-                                    <div class="coverDesign brown">
-                                        <span class="ribbon">NEW</span>
-                                        <img th:src="*{imageUrl}" width="99%" height="99%" />
-                                    </div>
-                                </li>
-                                <li></li>
-                            </ul>
-
-                            <!-- Pages -->
-                            <ul class='book_ul page'>
-                                <li></li>
-                                <li>
-                                    <a class="btn" href="#">Download</a>
-                                </li>
-                                <li></li>
-                                <li></li>
-                                <li></li>
-                            </ul>
-
-                            <!-- Back -->
-                            <ul class='book_ul hardcover_back'>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                            <ul class='book_ul book_spine'>
-                                <li></li>
-                                <li></li>
-                            </ul>
-                        </figure>
-                        <div class="coverflow-item-shadow"></div>
-                    </li>
-                </ul>
+                <ul th:replace="fragments/structure/carousel :: carousel"></ul>
+                <div id="description">
+                    <h1 id="descriptionTitle"></h1>
+                    <p id="author"></p>
+                    <span id="mark"></span>
+                </div>
             </div>
+
+            <div id="resultsBlock"></div>
 
             <!-- th replace modal -->
             <div th:replace="fragments/modal/modal-account :: modal-account"></div>
@@ -115,6 +87,7 @@
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
                 <script th:src="@{/js/jquery.flipster.min.js}"></script>
 
@@ -129,8 +102,36 @@
                                 spacing: 0.7,
                                 itemContainer: '#itemContainer',
                                 itemSelector: '.itemSelector',
+                                loop: true,
+                                onItemSwitch: function(currentItem, previousItem) {
+                                    var description = $('#description');
+                                    var books = /*[[${books}]]*/ null;
+                                    var index = getIndex(currentItem);
+
+                                    description.fadeOut(0.5);
+
+                                    $('#descriptionTitle').text(books[index].title);
+                                    $('#author').text("by " + books[index].author);
+                                    $('#mark').text(convertMarkInStars(books[index].mark));
+
+                                    description.fadeIn();
+                                }
                             }).ready(function(){
+                                $('.my-flipster #itemContainer').hover(function() {
+                                    $('.my-flipster').bind('mousewheel DOMMouseScroll',function(e){
+                                        stopWheel(e);
+                                    });
+                                }, function() {
+                                    $('.my-flipster').unbind('mousewheel DOMMouseScroll');
+                                });
                                 setTimeout(function(){
+                                    var books = /*[[${books}]]*/ null;
+                                    var index = $('.flipster__item--current').index();
+
+                                    $('#descriptionTitle').text(books[index].title);
+                                    $('#author').text("by " + books[index].author);
+                                    $('#mark').text(convertMarkInStars(books[index].mark));
+
                                     $('body').addClass('loaded');
                                 }, 1000);
                             });
@@ -138,15 +139,57 @@
                     });
 
                     function getBookDetailView(reference) {
-                        let baseLink = /*[[@{/book-detail/}]]*/'';
-                        location.href = baseLink + reference;
+                        var url = '/book-detail/' + reference;
+                        $('.flipster__item .book').removeClass("opened-book");
+                        $('.flipster__item--current .book').addClass("opened-book");
+
+                        $('#resultsBlock').load(url).ready(function () {
+                            document.documentElement.style.overflowY = "visible";
+                            document.body.style.overflowY = "visible";
+
+                            $('.flipster__item--current').removeAttr("onclick");
+                            $('.flipster__item').attr("onclick", "getBookDetailView(this.id)");
+                            if ($('.fa-chevron-down').length === 0) {
+                                $('#coverflow').append("<i class=\"fas fa-chevron-down\"></i>");
+                            }
+                        });
                     }
 
-                    function getParameter() {
-                        let itemContainer = $('#itemContainer');
-                        itemContainer.empty();
-                        itemContainer.load('/parameter-fragment/');
-                        $('.my-flipster').flipster('index');
+                    function getIndex(el) {
+                        return Array.from(el.parentNode.children).indexOf(el)
+                    }
+
+                    function stopWheel(e){
+                        if(!e){ /* IE7, IE8, Chrome, Safari */
+                            e = window.event;
+                        }
+                        if(e.preventDefault) { /* Chrome, Safari, Firefox */
+                            e.preventDefault();
+                        }
+                        e.returnValue = false; /* IE7, IE8 */
+                    }
+
+                    function convertMarkInStars(mark) {
+                        var markInStars = "";
+                        for(var i = 0; i < mark; i++){
+                            markInStars += "★"
+                        }
+                        if (markInStars.length < 5) {
+                            var emptyStars = 5 - markInStars.length;
+                            for(i = 0; i < emptyStars; i++){
+                                markInStars += "☆"
+                            }
+                        }
+                        return markInStars;
+                    }
+
+                    function showParameter() {
+                        body = $('body');
+                        body.removeClass('loaded');
+                        body.addClass('unloaded');
+                        setTimeout(function () {
+                            window.location.href = "/usager/parameter";
+                        }, 800)
                     }
                 </script>
             </footer>

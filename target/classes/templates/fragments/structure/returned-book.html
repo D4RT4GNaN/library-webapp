@@ -1,7 +1,7 @@
 <div id="returned-loan" th:fragment="returned-book">
-    <h3>Returned loan</h3>
-    <table>
-        <thead>
+    <h3 class="title">Returned loan</h3>
+    <table id="returned-loan-table" th:unless="${returnedLoans.isEmpty()}" class="table table-sm">
+        <thead class="thead-brown">
         <tr>
             <th>Title</th>
             <th>Library</th>
@@ -11,13 +11,36 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="loan: ${loans}" th:if="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
-            <td th:text="${loan.book.title}"></td>
+        <tr th:each="loan: ${returnedLoans}" th:if="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
+            <td>
+                <a class="book-title" th:text="${loan.book.title}" th:href="@{/book-detail/{reference}(reference=${loan.book.reference})}"></a>
+            </td>
             <td th:text="${loan.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${loan.library.address}"></td>
-            <td th:text="${loan.quantity}"></td>
-            <td th:text="${loan.borrowingDate}"></td>
-            <td th:text="${loan.expiryDate}"></td>
+            <td th:text="${loan.quantity}" class="cell-centered-content"></td>
+            <td th:text="${#dates.format(loan.startDate, 'dd-MM-yyyy')}" class="cell-centered-content"></td>
+            <td th:text="${#dates.format(loan.endDate, 'dd-MM-yyyy')}" class="cell-centered-content"></td>
         </tr>
         </tbody>
     </table>
+    <p th:if="${returnedLoans.isEmpty()}">You haven't returned any books</p>
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#returned-loan-table').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 5,
+                "pagingType": "full",
+                "language": {
+                    "paginate": {
+                        "first": "<< First",
+                        "previous": "< Previous",
+                        "next": "Next >",
+                        "last": "Last >>"
+                    }
+                },
+                "info": false
+            });
+        } );
+    </script>
 </div>

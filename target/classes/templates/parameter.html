@@ -7,6 +7,7 @@
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" />
 
         <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
         <link th:href="@{/css/modal.css}" rel="stylesheet" type="text/css" />
@@ -18,15 +19,14 @@
 
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     </head>
-    <body id="parameter-body">
+    <body id="paramater">
         <div id="loader-wrapper">
-            <div th:replace="fragments/svg/logo-animation :: logo-animation"></div>
             <div class="loader-section section-left"></div>
             <div class="loader-section section-right"></div>
         </div>
 
         <div id="content-wrapper">
-            <nav class="navbar navbar-expand-lg navbar-light fixed-top container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-light fixed-top container-fluid nav-parameter">
                 <a id="logo" class="navbar-brand col-3" href="/">
                     <div th:replace="fragments/svg/logo :: logo"></div>
                 </a>
@@ -38,7 +38,7 @@
                 <div class="collapse navbar-collapse col-9 row" id="navbarSupportedContent">
                     <form class="form-inline col-9 row" method="get" action="/search">
                         <input class="form-control col-9 mr-2 bg-input" type="search" placeholder="Search" aria-label="Search" name="searchString">
-                        <button class="btn btn-outline-brown col-2" type="submit">Search</button>
+                        <button class="btn btn-outline-lightbrown col-2" type="submit">Search</button>
                     </form>
 
                     <ul th:unless="${authentication.equals('anonymousUser')}" class="navbar-nav my-2 my-lg-0 pr-0 col-3 justify-content-end">
@@ -83,28 +83,28 @@
                 </ul>
             </div>
 
-            <footer>
+            <footer class="footer-parameter fixed-bottom">
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.js"></script>
+                <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
                 <script th:src="@{/js/jquery.flipster.min.js}"></script>
 
                 <script type="text/javascript" th:inline="javascript">
                     $(document).ready(function() {
-                        setTimeout(function(){
-                            $('.my-flipster').flipster({
-                                style: 'flat',
-                                buttons: true,
-                                spacing: 0.7,
-                                itemContainer: '#itemContainer',
-                                itemSelector: '.itemSelector',
-                            }).ready(function(){
-                                setTimeout(function(){
-                                    $('body').addClass('loaded');
-                                }, 1000);
-                            });
-                        }, 5500);
+                        $('.my-flipster').flipster({
+                            style: 'flat',
+                            buttons: true,
+                            spacing: 2,
+                            itemContainer: '#itemContainer',
+                            itemSelector: '.itemSelector',
+                            loop: true
+                        }).ready(function(){
+                            setTimeout(function(){
+                                $('body').addClass('loaded');
+                            }, 1000);
+                        });
                     });
                 </script>
             </footer>

@@ -1,43 +1,59 @@
 <div id="current-loan" th:fragment="current-loaned-book">
-    <h3>Current loan</h3>
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Library</th>
-            <th>Quantity</th>
-            <th>Expiry Date</th>
-            <th>Status</th>
-            <th>Buttons</th>
-        </tr>
+    <h3 class="title">Current loan</h3>
+    <table id="current-loan-table" class="table table-sm" th:unless="${currentLoans.isEmpty()}">
+        <thead class="thead-brown">
+            <tr>
+                <th>Title</th>
+                <th>Library</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+                <th>Buttons</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:if="${errorMessage != null}" th:text="${errorMessage}"></tr>
-        <tr th:each="loan: ${loans}" th:unless="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
-            <td th:text="${loan.book.title}"></td>
-            <td th:text="${loan.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${loan.library.address}"></td>
-            <td th:text="${loan.quantity}"></td>
-            <td th:text="${loan.expiryDate}"></td>
-            <td th:text="${loan.status}"></td>
-            <td>
-                <a class="btn btn-outline-secondary"
-                   th:href="@{/loan/extend(
-                                libraryId=${loan.library.numberRef},
-                                bookReference=${loan.book.reference},
-                                borrowingDate=${loan.borrowingDate}
-                           )}">
-                    Extend
-                </a>
-                <a class="btn btn-outline-secondary"
-                   th:href="@{/loan/return(
-                                libraryId=${loan.library.numberRef},
-                                bookReference=${loan.book.reference},
-                                borrowingDate=${loan.borrowingDate}
-                           )}">
-                    Return
-                </a>
-            </td>
-        </tr>
+            <tr th:if="${errorMessage != null}" th:text="${errorMessage}"></tr>
+            <tr th:each="loan: ${currentLoans}" th:unless="${loan.status.equals('RETURNED')}">
+                <td>
+                    <a class="book-title" th:text="${loan.book.title}" th:href="@{/book-detail/{reference}(reference=${loan.book.reference})}"></a>
+                </td>
+                <td th:text="${loan.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${loan.library.address}"></td>
+                <td th:text="${loan.quantity}" class="cell-centered-content"></td>
+                <td th:text="${#dates.format(loan.endDate, 'dd-MM-yyyy')}" class="cell-centered-content"></td>
+                <td th:text="${loan.status}" class="cell-centered-content"></td>
+                <td>
+                    <a class="fas fa-plus btn-col"
+                       th:href="@{/loan/extend(
+                                    libraryId=${loan.library.numberRef},
+                                    bookReference=${loan.book.reference},
+                                    borrowingDate=${loan.borrowingDate}
+                               )}">
+                        Extend
+                    </a>
+                    <br/>
+                    <a class="fas fa-undo-alt btn-col"
+                       th:href="@{/loan/return(
+                                    libraryId=${loan.library.numberRef},
+                                    bookReference=${loan.book.reference},
+                                    borrowingDate=${loan.borrowingDate}
+                               )}">
+                        Return
+                    </a>
+                </td>
+            </tr>
         </tbody>
     </table>
+    <p th:if="${currentLoans.isEmpty()}">You currently have no loaned books</p>
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#current-loan-table').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 5,
+                "pagingType": "numbers",
+                "info": false
+            });
+        } );
+    </script>
 </div>

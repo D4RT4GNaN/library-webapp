@@ -1,9 +1,9 @@
 function lineclamp() {
-    let synopsis = $('#synopsis');
-    let lineHeight = parseFloat(synopsis.css('line-height'));
-    let pageHeight = $('#content').height();
-    let calc = parseInt(pageHeight / lineHeight) - 1;
-    synopsis.css({"-webkit-line-clamp": "" + calc + ""});
+    var synopsis = $('#synopsis');
+    var lineHeight = parseFloat(synopsis.css('line-height'));
+    var pageHeight = $('#content').height();
+    var calc = parseInt(pageHeight / lineHeight) - 1;
+    document.documentElement.style.setProperty('--line-clamp', calc);
 }
 
 $(document).ready(function() {

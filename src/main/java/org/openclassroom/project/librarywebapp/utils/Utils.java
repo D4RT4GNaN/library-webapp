@@ -1,10 +1,18 @@
 package org.openclassroom.project.librarywebapp.utils;
 
+import org.openclassroom.project.librarywebapp.models.Loan;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.WebAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Utils {
 
@@ -60,6 +68,16 @@ public class Utils {
         }
 
         return redirectionString;
+    }
+
+    public static List<Loan> convert(List<generated.libraryservice.Loan> generatedLoans) {
+        List<Loan> loans = new ArrayList<>();
+
+        for (generated.libraryservice.Loan generatedLoan : generatedLoans) {
+            loans.add(new Loan(generatedLoan));
+        }
+
+        return loans;
     }
 
 }

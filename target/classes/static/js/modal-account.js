@@ -1,9 +1,9 @@
-const loginBox = $('.login-box');
-const registerBox = $('.register-box');
-const forgotPasswordBox = $('.forgot-password-box');
-const resendEmailBox = $('.resend-email-box');
+loginBox = $('.login-box');
+registerBox = $('.register-box');
+forgotPasswordBox = $('.forgot-password-box');
+resendEmailBox = $('.resend-email-box');
 
-let url = window.location.href;
+url = window.location.href;
 if(url.indexOf('loginError=true') !== -1) {
     openLoginForm();
 } else if (url.indexOf('registerError=true') !== -1) {
@@ -94,9 +94,11 @@ function showResendEmailForm() {
 }
 
 function submitRegisterForm() {
-    let form = document.getElementById('register-form');
+    var form = document.getElementById('register-form');
 
     if (form.checkValidity()) {
+        registerBox.fadeOut('fast');
+        $('.loaded').removeClass("loaded");
         form.submit();
     } else {
         validateForm();

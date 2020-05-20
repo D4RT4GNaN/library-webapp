@@ -1,11 +1,17 @@
 package org.openclassroom.project.librarywebapp.webmvc.config;
 
 import org.openclassroom.project.librarywebapp.converters.StringToXMLGregorianCalendarConverter;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Configuration
 @EnableWebMvc

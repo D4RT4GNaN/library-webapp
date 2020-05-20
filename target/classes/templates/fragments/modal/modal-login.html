@@ -29,7 +29,7 @@
 
             <!-- submit -->
             <div class="d-flex justify-content-center">
-                <input type="submit" id="submit-button" name="submit" value="Login" class="btn btn-outline-lightbrown" />
+                <input type="submit" name="submit" class="btn btn-outline-lightbrown" value="Login"/>
             </div>
 
             <!-- protection against Cross-Site Request Forgery attacks -->
@@ -46,19 +46,5 @@
             <a href="javascript: showForgotPasswordForm();" class="custom-modal-link">Forgot your password ?</a>
         </div>
     </div>
-
-    <script>
-        $('input[type=submit]').click(function(e) {
-            alert('test');
-            e.preventDefault();
-
-            jQuery.post(
-                'login',
-                function(data) {
-                    $('#navbar').load(document.URL + ' #navbar');
-                    alert(data);
-                });
-        });
-    </script>
 </div>
 

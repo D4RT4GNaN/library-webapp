@@ -1,7 +1,7 @@
 package org.openclassroom.project.librarywebapp.controllers;
 
 import generated.libraryservice.*;
-
+import org.openclassroom.project.librarywebapp.models.Loan;
 import org.openclassroom.project.librarywebapp.utils.Utils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/usager")
@@ -102,7 +104,22 @@ public class UsagerController extends AbstractController {
         Usager usager = (Usager) getAuthentication().getDetails();
         model.addAttribute("authentication", getAuthentication().getName());
         model.addAttribute("user", usager);
-        model.addAttribute("loans", libraryService.getLoansFor(usager.getId()));
+
+        List<Loan> loans = Utils.convert(libraryService.getLoansFor(usager.getId()));
+        List<Loan> currentLoans = new ArrayList<>();
+        List<Loan> returnedLoans = new ArrayList<>();
+
+        for (Loan loan : loans) {
+            if (loan.getStatus().equals("RETURNED")) {
+                returnedLoans.add(loan);
+            } else {
+                currentLoans.add(loan);
+            }
+        }
+
+        model.addAttribute("currentLoans", currentLoans);
+        model.addAttribute("returnedLoans", returnedLoans);
+
         return "parameter";
     }
 

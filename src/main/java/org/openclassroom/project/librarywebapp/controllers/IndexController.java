@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -35,34 +38,37 @@ public class IndexController extends AbstractController {
 
 
 
-    // ==================== Book Detail Method ====================
+    // ==================== Book Detail Ajax Method ====================
     @GetMapping("/book-detail/{reference}")
-    public String showBookDetail(Model model, @PathVariable String reference, @ModelAttribute("errorMessage")String message, @ModelAttribute("user")Usager usager, HttpServletRequest request) {
-        model.addAttribute("authentication", getAuthentication().getName());
-        model.addAttribute("user", usager);
+    public String getBookDetail(Model model, @PathVariable String reference, HttpServletRequest request) {
         model.addAttribute("book", libraryService.getBooksWithKeyword(reference).get(0));
-
-        String loginErrorMessage = Utils.getErrorMessage(request);
-        if (loginErrorMessage != null) { message = loginErrorMessage; }
-        if (!message.equals("")) { model.addAttribute("errorMessage", message); }
-
+        model.addAttribute("authentication", getAuthentication().getName());
         model.addAttribute("stocks", libraryService.getBookAvailability(reference));
         model.addAttribute("newComment", new Comment());
 
-        return "book-detail";
+        return "fragments/structure/book-detail :: book-detail";
     }
 
 
 
     // ==================== Comment Method ====================
     @PostMapping("/book-detail/{reference}/comment")
-    public String commentBook(@PathVariable String reference, @ModelAttribute Comment comment) {
-        comment.setAuthor((Usager) getAuthentication().getDetails());
+    public String commentBook(@PathVariable String reference, @ModelAttribute("newComment") Comment comment, Model model) {
+        Usager usager = new Usager();
+
+        if (getAuthentication().getDetails() instanceof Usager) {
+            usager = (Usager) getAuthentication().getDetails();
+        }
+
+        comment.setAuthor(usager);
         comment.setBookReference(reference);
 
         libraryService.addComment(comment);
 
-        return "redirect:/book-detail/" + reference;
+        model.addAttribute("authentication", getAuthentication().getName());
+        model.addAttribute("book", libraryService.getBooksWithKeyword(reference).get(0));
+
+        return "fragments/structure/comments :: comments";
     }
 
 
@@ -70,8 +76,17 @@ public class IndexController extends AbstractController {
     // ==================== Private Method ====================
     private void configModel(Model model, HttpServletRequest request, @ModelAttribute("user") Usager usager, @ModelAttribute("errorMessage") String message, String searchString) {
         List<Book> books = libraryService.getBooksWithKeyword(searchString);
+        List<Book> booksSublist;
+        if (searchString.equals("")) {
+            Comparator<Book> comparator = Comparator.comparing(Book::getMark);
+            books.sort(comparator);
+            Collections.reverse(books);
+            booksSublist = books.subList(0,21);
+        } else {
+            booksSublist = books;
+        }
 
-        model.addAttribute("books", books);
+        model.addAttribute("books", booksSublist);
         model.addAttribute("categories", getCategories(books));
 
         if (getAuthentication().getDetails() instanceof Usager) {

@@ -1,0 +1,40 @@
+<ul xmlns:th="http://www.thymeleaf.org" id="itemContainer" th:fragment="carousel">
+    <li th:each="book : ${books}" th:id="${book.reference}" onclick="getBookDetailView(this.id)" class="itemSelector">
+        <figure class='book' th:object="${book}" >
+            <!-- Front -->
+            <ul class='book_ul hardcover_front'>
+                <li>
+                    <div class="coverDesign brown">
+                        <span class="ribbon">NEW</span>
+                        <img th:src="*{imageUrl}" width="99%" height="99%" />
+                    </div>
+                </li>
+                <li></li>
+            </ul>
+
+            <!-- Pages -->
+            <ul class='book_ul page'>
+                <li id="bookTitle" th:text="${book.title}"></li>
+                <li>
+                    <div class="middle">
+                        <div class="mouse"></div>
+                    </div>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+
+            <!-- Back -->
+            <ul class='book_ul hardcover_back'>
+                <li></li>
+                <li></li>
+            </ul>
+            <ul class='book_ul book_spine'>
+                <li></li>
+                <li></li>
+            </ul>
+        </figure>
+        <div class="coverflow-item-shadow"></div>
+    </li>
+</ul>

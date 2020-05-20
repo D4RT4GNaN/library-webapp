@@ -47,9 +47,9 @@
 
 
 /*
-  ===============================
-  ---------- Animation ----------
-  ===============================
+  =====================================
+  ---------- Start Animation ----------
+  =====================================
 */
 
 /* ---------- We start by the fade-out the logo ---------- */
@@ -86,4 +86,36 @@
 
     -webkit-transition: all 0.3s 1s ease-out;
     transition: all 0.3s 1s ease-out;
+}
+
+
+
+/*
+  =====================================
+  ---------- End Animation ----------
+  =====================================
+*/
+
+/* ---------- We start by keep logo hidden ---------- */
+.unloaded #loader svg {
+    opacity: 0;
+}
+
+/* ---------- We continue with the translation of the L/R sections ---------- */
+.unloaded #loader-wrapper .loader-section.section-left {
+    -webkit-transform: translateX(0%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(0%);  /* IE 9 */
+    transform: translateX(0%);  /* Firefox 16+, IE 10+, Opera */
+
+    -webkit-transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+
+.unloaded #loader-wrapper .loader-section.section-right {
+    -webkit-transform: translateX(0%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(0%);  /* IE 9 */
+    transform: translateX(0%);  /* Firefox 16+, IE 10+, Opera */
+
+    -webkit-transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
 }

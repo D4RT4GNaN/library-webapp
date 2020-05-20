@@ -10,12 +10,13 @@
         <input type="text" th:field="*{lastname}" class="personal-data-input form-control bg-input mb-3" readonly />
         <input type="email" th:field="*{email}" class="personal-data-input form-control bg-input mb-3" readonly />
         <input type="text" th:field="*{adress}" class="personal-data-input form-control bg-input mb-3" readonly />
-        <input type="hidden" id="personal-data-submit" class="btn btn-outline-lightbrown" />
+        <input type="submit" id="personal-data-submit" class="btn btn-outline-lightbrown" style="display: none"/>
+        <input type="hidden">
     </form>
 
     <script>
         function toggleEditButton() {
-            let editButton = document.querySelector("#edit-button");
+            var editButton = document.querySelector("#edit-button");
             if (editButton.classList.contains("fa-edit")) {
                 editButton.classList.remove("fa-edit");
                 editButton.classList.add("fa-times");
@@ -26,18 +27,20 @@
         }
 
         function toggleInput() {
-            $("form#personal-data-form :input[class=personal-data-input]").each(function(){
-                let input = $(this);
+            $('.personal-data-input').each(function(){
+                var input = $(this);
                 input.is("[readonly]") ? input.removeAttr("readonly") : input.attr("readonly", "readonly");
             });
 
-            let submitButton = $('#personal-data-submit');
-            if (submitButton.is("[type=hidden]")) {
-                submitButton.attr("type", "submit");
+            var submitButton = $('#personal-data-submit');
+            submitButton.toggle('style');
+            $("#personal-data-form")[0].reset();
+            /*if (submitButton.is("[hidden]")) {
+                submitButton.removeAttr("hidden");
             } else {
-                submitButton.attr("type", "hidden");
+                submitButton.attr("hidden");
                 $("#personal-data-form")[0].reset();
-            }
+            }*/
         }
 
         function editOrCancel() {

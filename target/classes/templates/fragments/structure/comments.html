@@ -1,0 +1,86 @@
+<div xmlns:th="http://www.thymeleaf.org" class="container commentContainer" th:fragment="comments">
+    <h2>
+        Comments
+        <div th:unless="${authentication.equals('anonymousUser')}" class="float-right">
+            <a id="addCommentButton" class="btn btn-outline-lightbrown" onclick="showCommentForm();">Add a coment</a>
+        </div>
+    </h2>
+    <div th:unless="${authentication.equals('anonymousUser')}" class="row" id="addCommentForm">
+        <form class="col-11 m-5 " th:object="${newComment}" method="post">
+            <div class="form-group">
+                <input class="form-control bg-input" type="text" placeholder="title ..." th:field="*{title}" />
+                <textarea class="form-control bg-input" placeholder="Comment content..." th:field="*{content}"></textarea><br/>
+                <button class="btn btn-outline-lightbrown" onclick="sendComment();">Send</button>
+            </div>
+        </form>
+    </div>
+    <table id="commentsTable">
+        <thead>
+            <th>HIDDEN</th>
+        </thead>
+        <tbody>
+            <tr th:each="comment : ${book.comments}">
+                <td class="container">
+                    <div class="row tableRow">
+                        <div class="col-4">
+                            <small>
+                                <strong class='user' th:text="${comment.author.firstname + ' ' + comment.author.lastname}"></strong>
+                                <span th:text="${comment.date}"></span>
+                            </small>
+                        </div>
+                        <div class="col-8 row contentComment">
+                            <p id="commentTitle" class="col-12" th:text="${comment.title}"></p>
+                            <p class="col-12" th:text="${comment.content}"></p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script th:inline="javascript">
+        function sendComment() {
+            var reference = /*[[${book.reference}]]*/ '';
+
+            var url = "/book-detail/" + reference + "/comment";
+            var $form = $('#addCommentForm form');
+
+            $form.on('submit', function(e) {
+                e.preventDefault();
+                $.ajax({
+                    url : url,
+                    type : 'post',
+                    data : $form.serialize(),
+                    success : function(response) {
+                        if ($(response).find('.has-error').length) {
+                            $form.replaceWith(response);
+                        }
+                        else{
+                            $('.commentContainer').replaceWith(response);
+                            $('#commentsTable').DataTable({
+                                "searching": false,
+                                "lengthChange": false,
+                                "pageLength": 5,
+                                "pagingType": "full",
+                                "language": {
+                                    "paginate": {
+                                        "first": "<< First",
+                                        "previous": "< Previous",
+                                        "next": "Next >",
+                                        "last": "Last >>"
+                                    }
+                                },
+                                "info": false,
+                                "ordering": false
+                            });
+                        }
+                    }
+                });
+            });
+        }
+
+        function showCommentForm() {
+            $('#addCommentForm').show();
+        }
+    </script>
+</div>
