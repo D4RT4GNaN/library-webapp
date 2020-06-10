@@ -42,13 +42,15 @@ To start with this project :
 
 1. Open it in IDE.
 
-2. In terminal, go to the project folder and enter the following command :
+2. Delete the *generated.libraryservice* folder.
+
+3. In terminal, go to the project folder and enter the following command :
 ```
 
 $ wsimport -Xnocompile -d ./src/main/java -p generated.libraryservice [your_address] 
 
 ```
-where "your_address" is the address of the WSDL on your web service (ex: http://localhost:8080/libraryservice-webservice/libraryservice?wsdl)
+where **[your_address]** is the address of the WSDL on your web service (ex: http://localhost:8080/libraryservice-webservice/libraryservice?wsdl)
 
 
 
