@@ -1,19 +1,21 @@
 <!-- Modal -->
-<div th:fragment="modal-account" class="modal fade" id="modal-account" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true">
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="modal-account"
+     class="modal fade" id="modal-account" role="dialog"
+     aria-labelledby="accountModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
 
             <!-- ===== LOGIN ===== -->
-            <div th:replace="fragments/modal/modal-login :: modal-login" />
+            <div th:replace="fragments/modal/modal-login :: modal-login"></div>
 
             <!-- ===== REGISTER ===== -->
-            <div th:replace="fragments/modal/modal-register :: modal-register" />
+            <div th:replace="fragments/modal/modal-register :: modal-register"></div>
 
             <!-- ===== FORGOT PASSWORD ===== -->
-            <div th:replace="fragments/modal/modal-forgot-password :: modal-forgot-password" />
+            <div th:replace="fragments/modal/modal-forgot-password :: modal-forgot-password"></div>
 
             <!-- ===== RESEND EMAIL ===== -->
-            <div th:replace="fragments/modal/modal-resend-email :: modal-resend-email" />
+            <div th:replace="fragments/modal/modal-resend-email :: modal-resend-email"></div>
 
         </div>
     </div>

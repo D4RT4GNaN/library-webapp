@@ -1,0 +1,169 @@
+/**
+    1. General Features
+ */
+
+
+
+/**
+    2. Carousel
+ */
+.title {
+    margin-bottom: 1.5rem;
+    text-shadow: 0 5px 5px var(--semitransparent-black);
+    color: var(--beige);
+}
+
+.title a {
+    color: var(--semitransparent-black);
+    font-size: medium;
+    text-shadow: 0 5px 5px var(--semitransparent-black);
+    margin-left: 1em;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.title a:hover {
+    color: var(--beige);
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#parameter .flipster__item {
+    vertical-align: middle;
+}
+
+
+
+/**
+    3. Personal Information Form
+ */
+.form-control:disabled, .form-control[readonly] {
+    background-color: var(--beige);
+}
+
+
+
+/**
+    4. Tables
+ */
+table {
+    box-shadow: 0 5px 5px var(--semitransparent-black);
+}
+
+tbody, tbody a {
+    color: var(--dark);
+}
+
+table.dataTable tbody tr {
+    background-color: var(--beige);
+}
+
+table.dataTable {
+    border-collapse: collapse;
+}
+
+.table .thead-brown th {
+    color: var(--beige);
+    background-color: var(--semitransparent-black);
+    border-color: transparent;
+}
+
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    border-top: 1px solid var(--semitransparent-black);
+}
+
+#current-borrowing td{
+    max-width: 20vw;
+}
+
+.cell-centered-content {
+    text-align: center;
+}
+
+/* Book title cell */
+.book-title {
+    position: relative;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+    border: 0 none;
+    outline: none;
+}
+
+.book-title:hover {
+    color: var(--custom-grey);
+    text-decoration: none;
+}
+
+.book-title:before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 5%;
+    bottom: 0;
+    left: 0;
+    margin-top: 1px;
+    background: var(--custom-grey);
+    visibility: hidden;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transition: .25s linear;
+}
+
+.book-title:hover:before,
+.book-title:focus:before {
+    visibility: visible;
+    transform: scaleX(1);
+}
+
+/* Buttons in last cell */
+.btn-col:hover {
+    color: var(--custom-grey);
+    text-decoration: none;
+    text-shadow: 0 0 0 var(--semitransparent-black);
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+/* Paginate Buttons */
+#current-borrowing .dataTables_wrapper .dataTables_paginate .paginate_button {
+    min-width: 0;
+    height: 15px;
+    width: 15px;
+    padding: 0;
+}
+
+#current-borrowing .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+#current-borrowing .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+    color: transparent !important;
+    background-color: var(--beige) !important;
+    border: 1px solid var(--beige);
+    border-radius: 50%;
+    background: var(--beige);
+}
+
+#current-borrowing .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: transparent !important;
+    background-color: transparent !important;
+    background: transparent;
+    border: 1px solid var(--beige);
+    border-radius: 50%;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#current-borrowing .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    color: transparent !important;
+    background-color: var(--beige) !important;
+    background: var(--beige);
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#returned-borrowing .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: var(--dark) !important;
+    -webkit-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}

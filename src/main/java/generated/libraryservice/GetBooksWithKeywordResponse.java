@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="listBooks" type="{http://LibraryService/}book" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="listBooks" type="{http://LibraryService/}generatedBook" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
 public class GetBooksWithKeywordResponse {
 
     @XmlElement(nillable = true)
-    protected List<Book> listBooks;
+    protected List<GeneratedBook> listBooks;
 
     /**
      * Gets the value of the listBooks property.
@@ -57,13 +57,13 @@ public class GetBooksWithKeywordResponse {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link Book }
+     * {@link GeneratedBook }
      * 
      * 
      */
-    public List<Book> getListBooks() {
+    public List<GeneratedBook> getListBooks() {
         if (listBooks == null) {
-            listBooks = new ArrayList<Book>();
+            listBooks = new ArrayList<GeneratedBook>();
         }
         return this.listBooks;
     }

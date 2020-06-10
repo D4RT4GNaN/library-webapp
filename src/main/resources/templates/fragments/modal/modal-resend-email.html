@@ -1,27 +1,31 @@
-<div th:fragment="modal-resend-email" class="resend-email-box">
-    <!-- ----- HEADER ----- -->
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="modal-resend-email" class="resend-email-box">
+    <!--/*@thymesVar id="errorMessage" type="java.lang.String"*/-->
+
+    <!-- ===== HEADER ===== -->
     <div class="modal-header">
-        <h5 class="modal-title" id="resendEmailModalLabel">Renvoyez l'email de confirmation</h5>
+        <h5 class="modal-title" id="resendEmailModalLabel" th:text="#{modal.title.resendemail}"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 
-    <!-- ----- BODY ----- -->
+    <!-- ===== BODY ===== -->
     <div class="modal-body">
-        <form th:action="@{/usager/resend-confirm-email}" method="post">
-            <div class="error-message" th:if="${#httpServletRequest.getParameter('emailSendingError') != null}" th:text="${errorMessage}"></div>
+        <form th:action="@{/user/resend-confirm-email}" method="post">
+            <div class="error-message" th:if="${#httpServletRequest.getParameter('emailSendingError') != null}"
+                 th:text="${errorMessage}"></div>
+
             <!-- email -->
             <div class="input-group form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" name="email" class="form-control input-brown" placeholder="Email">
+                <input type="text" name="email" class="form-control input-brown" th:placeholder="#{placeholder.email}" />
             </div>
 
             <!-- submit -->
             <div class="d-flex justify-content-center">
-                <input type="submit" name="submit" value="Envoyez" class="btn btn-outline-lightbrown">
+                <input type="submit" name="submit" th:value="#{button.send}" class="btn btn-outline-lightbrown" />
             </div>
 
             <!-- protection against Cross-Site Request Forgery attacks -->
@@ -29,10 +33,12 @@
         </form>
     </div>
 
-    <!-- ----- FOOTER ----- -->
+    <!-- ===== FOOTER ===== -->
     <div class="modal-footer flex-column footer-font-size">
         <div>
-            Already have an account ? <a href="javascript: showLoginForm();" id="login-link" class="custom-modal-link">Login</a>
+            <span th:text="#{modal.text.login}"></span>
+            <a href="javascript: showLoginForm();" id="login-link" class="custom-modal-link"
+               th:text="#{modal.link.login}"></a>
         </div>
     </div>
 </div>

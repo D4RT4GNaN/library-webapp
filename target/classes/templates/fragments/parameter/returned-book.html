@@ -1,0 +1,53 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="returned-book" id="returned-borrowing">
+    <h3 class="title" th:text="#{parameter.title.returnedBorrowing}"></h3>
+
+    <!--/*@thymesVar id="returnedBorrowings" type="java.util.ArrayList<org.openclassroom.project.librarywebapp.models.Borrowing>"*/-->
+    <table id="returned-borrowing-table" th:unless="${returnedBorrowings.isEmpty()}" class="table table-sm">
+        <thead class="thead-brown">
+        <tr>
+            <th th:text="#{table.title}"></th>
+            <th th:text="#{table.library}"></th>
+            <th th:text="#{table.quantity}"></th>
+            <th th:text="#{table.borrowingdate}"></th>
+            <th th:text="#{table.expirydate}"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="borrowing: ${returnedBorrowings}" th:if="${borrowing.status.equals('RETURNED')}"
+            th:data="${borrowing.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
+            <td>
+                <a class="book-title" th:text="${borrowing.book.title}"
+                   th:href="@{/book-detail/{reference}(reference=${borrowing.book.reference})}"></a>
+            </td>
+            <td th:text="${borrowing.library.name}" data-toggle="tooltip" data-placement="bottom"
+                th:title="${borrowing.library.address}"></td>
+            <td th:text="${borrowing.quantity}" class="cell-centered-content"></td>
+            <td th:text="${#dates.format(borrowing.startDate, 'dd-MM-yyyy')}" class="cell-centered-content"></td>
+            <td th:text="${#dates.format(borrowing.endDate, 'dd-MM-yyyy')}" class="cell-centered-content"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- If there are no books returned -->
+    <p th:if="${returnedBorrowings.isEmpty()}" th:text="#{parameter.text.noreturnedbook}"></p>
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#returned-borrowing-table').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 5,
+                "pagingType": "full",
+                "language": {
+                    "paginate": {
+                        "first": "<< First",
+                        "previous": "< Previous",
+                        "next": "Next >",
+                        "last": "Last >>"
+                    }
+                },
+                "info": false
+            });
+        } );
+    </script>
+</div>

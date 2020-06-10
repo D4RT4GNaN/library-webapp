@@ -1,0 +1,70 @@
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="current-borrowed-book" id="current-borrowing">
+    <!--/*@thymesVar id="currentBorrowings" type="java.util.ArrayList<org.openclassroom.project.librarywebapp.models.Borrowing>"*/-->
+    <!--/*@thymesVar id="errorMessage" type="String"*/-->
+    <!--/*@thymesVar id="borrowing" type="org.openclassroom.project.librarywebapp.models.Borrowing"*/-->
+
+    <h3 class="title" th:text="#{parameter.title.currentborrowing}"></h3>
+
+    <table id="current-borrowing-table" class="table table-sm" th:unless="${currentBorrowings.isEmpty()}">
+        <thead class="thead-brown">
+            <tr>
+                <th>Title</th>
+                <th>Library</th>
+                <th>Quantity</th>
+                <th>Expiry Date</th>
+                <th>Status</th>
+                <th>Buttons</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:if="${errorMessage != null}" th:text="${errorMessage}"></tr>
+            <tr th:each="borrowing: ${currentBorrowings}" th:unless="${borrowing.status.equals('RETURNED')}">
+                <td>
+                    <a class="book-title" th:text="${borrowing.book.title}"
+                       th:href="@{/book-detail/{reference}(reference=${borrowing.book.reference})}"></a>
+                </td>
+                <td th:text="${borrowing.library.name}" data-toggle="tooltip" data-placement="bottom"
+                    th:title="${borrowing.library.address}"></td>
+                <td th:text="${borrowing.quantity}" class="cell-centered-content"></td>
+                <td th:text="${#dates.format(borrowing.endDate, 'dd-MM-yyyy')}" class="cell-centered-content"></td>
+                <td th:text="${borrowing.status}" class="cell-centered-content"></td>
+
+                <!-- Column of extension and book return buttons -->
+                <td>
+                    <a class="fas fa-plus btn-col"
+                       th:href="@{/borrowing/extend(
+                                    libraryId=${borrowing.library.numberRef},
+                                    bookReference=${borrowing.book.reference},
+                                    borrowingDate=${borrowing.borrowingDate}
+                               )}">
+                        Extend
+                    </a>
+                    <br/>
+                    <a class="fas fa-undo-alt btn-col"
+                       th:href="@{/borrowing/return(
+                                    libraryId=${borrowing.library.numberRef},
+                                    bookReference=${borrowing.book.reference},
+                                    borrowingDate=${borrowing.borrowingDate}
+                               )}">
+                        Return
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- If there are no books being borrowed -->
+    <p th:if="${currentBorrowings.isEmpty()}" th:text="#{parameter.text.nocurrentborrowing}"></p>
+
+    <script type="text/javascript">
+        $(document).ready( function () {
+            $('#current-borrowing-table').DataTable({
+                "searching": false,
+                "lengthChange": false,
+                "pageLength": 5,
+                "pagingType": "numbers",
+                "info": false
+            });
+        } );
+    </script>
+</div>

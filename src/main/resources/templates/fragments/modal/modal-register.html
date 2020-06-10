@@ -1,24 +1,28 @@
-<div th:fragment="modal-register" class="register-box" xmlns:th="http://www.thymeleaf.org">
-    <!-- ----- HEADER ----- -->
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="modal-register" class="register-box">
+    <!--/*@thymesVar id="user" type="generated.libraryservice.GeneratedUsager"*/-->
+    <!--/*@thymesVar id="errorMessage" type="java.lang.String"*/-->
+
+    <!-- ===== HEADER ===== -->
     <div class="modal-header">
-        <h5 class="modal-title" id="registerModalLabel">Inscription</h5>
+        <h5 class="modal-title" id="registerModalLabel" th:text="#{modal.title.register}"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
 
-    <!-- ----- BODY ----- -->
+    <!-- ===== BODY ===== -->
     <div class="modal-body">
-        <!--/*@thymesVar id="user" type="generated.libraryservice.Usager"*/-->
-        <form th:action="@{/usager/register}" th:object="${user}" method="post" id="register-form" novalidate>
-            <!--/*@thymesVar id="errorMessage" type="String"*/-->
-            <div class="error-message" th:if="${#httpServletRequest.getParameter('registerError') != null}" th:text="${errorMessage}"></div>
+        <form th:action="@{/user/register}" th:object="${user}" method="post" id="register-form" novalidate>
+            <div class="error-message" th:if="${#httpServletRequest.getParameter('registerError') != null}"
+                 th:text="${errorMessage}"></div>
+
             <!-- username -->
             <div class="input-group form-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-at"></i></span>
                 </div>
-                <input type="email" id="register-email" th:field="${user.email}" class="form-control input-brown" placeholder="Email" onkeyup="validateEmail()" required>
+                <input type="email" id="register-email" th:field="${user.email}" class="form-control input-brown"
+                       th:placeholder="#{placeholder.email}" onkeyup="validateEmail()" required>
             </div>
 
             <!-- password -->
@@ -26,7 +30,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="password" id="register-password" th:field="*{password}" class="form-control input-brown" placeholder="Mot de passe" onkeyup="validatePassword(this.id)" required>
+                <input type="password" id="register-password" th:field="*{password}" class="form-control input-brown"
+                       th:placeholder="#{placeholder.password}" onkeyup="validatePassword(this.id)" required>
                 <div class="messages"></div>
             </div>
 
@@ -35,7 +40,9 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-key"></i></span>
                 </div>
-                <input type="password" id="register-confirm-password" th:field="*{confirmPassword}" class="form-control input-brown" placeholder="Confirmation" onkeyup="validateConfirmPassword('register-password', this.id)" required>
+                <input type="password" id="register-confirm-password" th:field="*{confirmPassword}"
+                       class="form-control input-brown" th:placeholder="#{placeholder.confirmation}"
+                       onkeyup="validateConfirmPassword('register-password', this.id)" required>
                 <div class="messages"></div>
             </div>
 
@@ -44,7 +51,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" id="register-firstname" th:field="*{firstname}" class="form-control input-brown" placeholder="Prénom" onkeyup="validateBasicData(this.id)" required>
+                <input type="text" id="register-firstname" th:field="*{firstname}" class="form-control input-brown"
+                       th:placeholder="#{placeholder.firstname}" onkeyup="validateBasicData(this.id)" required>
                 <div class="messages"></div>
             </div>
 
@@ -53,7 +61,8 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-user"></i></span>
                 </div>
-                <input type="text" id="register-lastname" th:field="*{lastname}" class="form-control input-brown" placeholder="Nom" onkeyup="validateBasicData(this.id)" required>
+                <input type="text" id="register-lastname" th:field="*{lastname}" class="form-control input-brown"
+                       th:placeholder="#{placeholder.lastname}" onkeyup="validateBasicData(this.id)" required>
                 <div class="messages"></div>
             </div>
 
@@ -62,13 +71,16 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text"><i class="fas fa-home"></i></span>
                 </div>
-                <input type="text" id="register-address" th:field="*{adress}" th:value="${user.adress}" class="form-control input-brown" placeholder="Adresse" onkeyup="validateAddress();" required>
+                <input type="text" id="register-address" th:field="*{adress}" th:value="${user.adress}"
+                       class="form-control input-brown" th:placeholder="#{placeholder.address}"
+                       onkeyup="validateAddress();" required>
                 <div class="messages"></div>
             </div>
 
             <!-- submit -->
             <div class="d-flex justify-content-center">
-                <a href="javascript: submitRegisterForm();" class="btn btn-outline-lightbrown">Sign Up</a>
+                <a href="javascript: submitRegisterForm();" class="btn btn-outline-lightbrown"
+                   th:text="#{button.register}"></a>
             </div>
 
             <!-- protection against Cross-Site Request Forgery attacks -->
@@ -76,13 +88,17 @@
         </form>
     </div>
 
-    <!-- ----- FOOTER ----- -->
+    <!-- ===== FOOTER ===== -->
     <div class="modal-footer flex-column footer-font-size">
         <div>
-            Already have an account ? <a href="javascript: showLoginForm();" id="login-link" class="custom-modal-link">Login</a>
+            <span th:text="#{modal.text.login}"></span>
+            <a href="javascript: showLoginForm();" id="login-link" class="custom-modal-link"
+               th:text="#{modal.link.login}"></a>
         </div>
         <div>
-            You didn't receive the email ? <a href="javascript: showResendEmailForm();" class="custom-modal-link">Resend it</a>
+            <span th:text="#{modal.text.resendemail}"></span>
+            <a href="javascript: showResendEmailForm();" class="custom-modal-link"
+               th:text="#{modal.link.resendemail}"></a>
         </div>
     </div>
 </div>

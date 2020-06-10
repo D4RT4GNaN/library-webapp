@@ -1,6 +1,6 @@
 <div id="current-loan" th:fragment="current-loaned-book">
     <h3 class="title">Current loan</h3>
-    <table id="current-loan-table" class="table table-sm" th:unless="${currentLoans.isEmpty()}">
+    <table id="current-loan-table" class="table table-sm" th:unless="${currentBorrowings.isEmpty()}">
         <thead class="thead-brown">
             <tr>
                 <th>Title</th>
@@ -13,7 +13,7 @@
         </thead>
         <tbody>
             <tr th:if="${errorMessage != null}" th:text="${errorMessage}"></tr>
-            <tr th:each="loan: ${currentLoans}" th:unless="${loan.status.equals('RETURNED')}">
+            <tr th:each="loan: ${currentBorrowings}" th:unless="${loan.status.equals('RETURNED')}">
                 <td>
                     <a class="book-title" th:text="${loan.book.title}" th:href="@{/book-detail/{reference}(reference=${loan.book.reference})}"></a>
                 </td>
@@ -43,7 +43,7 @@
             </tr>
         </tbody>
     </table>
-    <p th:if="${currentLoans.isEmpty()}">You currently have no loaned books</p>
+    <p th:if="${currentBorrowings.isEmpty()}">You currently have no loaned books</p>
 
     <script type="text/javascript">
         $(document).ready( function () {

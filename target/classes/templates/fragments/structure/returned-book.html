@@ -1,6 +1,6 @@
 <div id="returned-loan" th:fragment="returned-book">
     <h3 class="title">Returned loan</h3>
-    <table id="returned-loan-table" th:unless="${returnedLoans.isEmpty()}" class="table table-sm">
+    <table id="returned-loan-table" th:unless="${returnedBorrowings.isEmpty()}" class="table table-sm">
         <thead class="thead-brown">
         <tr>
             <th>Title</th>
@@ -11,7 +11,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="loan: ${returnedLoans}" th:if="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
+        <tr th:each="loan: ${returnedBorrowings}" th:if="${loan.status.equals('RETURNED')}" th:data="${loan.book.reference}" onclick="getBookDetailView(this.getAttribute('data'));">
             <td>
                 <a class="book-title" th:text="${loan.book.title}" th:href="@{/book-detail/{reference}(reference=${loan.book.reference})}"></a>
             </td>
@@ -22,7 +22,7 @@
         </tr>
         </tbody>
     </table>
-    <p th:if="${returnedLoans.isEmpty()}">You haven't returned any books</p>
+    <p th:if="${returnedBorrowings.isEmpty()}">You haven't returned any books</p>
 
     <script type="text/javascript">
         $(document).ready( function () {

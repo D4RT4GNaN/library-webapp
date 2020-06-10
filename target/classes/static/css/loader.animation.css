@@ -1,0 +1,121 @@
+/*
+  ============================
+  ---------- Design ----------
+  ============================
+*/
+
+#loader-wrapper {
+    height: 100%;
+    position: fixed;
+    z-index: 101;
+}
+
+#loader-wrapper .loader-section {
+    position: fixed;
+    top: 0;
+    width: 51%;
+    height: 100%;
+    background: var(--custom-brown);
+    z-index: 1000;
+}
+
+#loader-wrapper .loader-section.section-left {
+    left: 0;
+}
+
+#loader-wrapper .loader-section.section-right {
+    right: 0;
+}
+
+#loader {
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    z-index: 1001;
+}
+
+#loader svg {
+    left: 50%;
+    top: 50%;
+    width: 25%;
+}
+
+
+
+/*
+  =====================================
+  ---------- Start Animation ----------
+  =====================================
+*/
+
+/* ---------- We start by the fade-out the logo ---------- */
+.loaded #loader svg {
+    opacity: 0;
+    -webkit-transition: opacity 0.3s ease-out;
+    transition: opacity 0.3s ease-out;
+}
+
+/* ---------- We continue with the translation of the L/R sections ---------- */
+.loaded #loader-wrapper .loader-section.section-left {
+    -webkit-transform: translateX(-100%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(-100%);  /* IE 9 */
+    transform: translateX(-100%);  /* Firefox 16+, IE 10+, Opera */
+
+    -webkit-transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+
+.loaded #loader-wrapper .loader-section.section-right {
+    -webkit-transform: translateX(100%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(100%);  /* IE 9 */
+    transform: translateX(100%);  /* Firefox 16+, IE 10+, Opera */
+
+    -webkit-transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+
+/* ---------- We end up moving the wrapper ---------- */
+.loaded #loader {
+    -webkit-transform: translateY(-200%);
+    -ms-transform: translateY(-200%);
+    transform: translateY(-200%);
+
+    -webkit-transition: all 0.3s 1s ease-out;
+    transition: all 0.3s 1s ease-out;
+}
+
+
+
+/*
+  =====================================
+  ---------- End Animation ----------
+  =====================================
+*/
+
+/* ---------- We start by keep logo hidden ---------- */
+.unloaded #loader svg {
+    opacity: 0;
+}
+
+/* ---------- We continue with the translation of the L/R sections ---------- */
+.unloaded #loader-wrapper .loader-section.section-left {
+    -webkit-transform: translateX(0%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(0%);  /* IE 9 */
+    transform: translateX(0%);  /* Firefox 16+, IE 10+, Opera */
+
+    -webkit-transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}
+
+.unloaded #loader-wrapper .loader-section.section-right {
+    -webkit-transform: translateX(0%);  /* Chrome, Opera 15+, Safari 3.1+ */
+    -ms-transform: translateX(0%);  /* IE 9 */
+    transform: translateX(0%);  /* Firefox 16+, IE 10+, Opera */
+
+    -webkit-transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.7s .3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+}

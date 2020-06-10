@@ -26,9 +26,9 @@ public class ObjectFactory {
 
     private final static QName _UpdateUserFault_QNAME = new QName("http://LibraryService/", "UpdateUserFault");
     private final static QName _RegisterFault_QNAME = new QName("http://LibraryService/", "RegisterFault");
+    private final static QName _BookBorrowingExtensionFault_QNAME = new QName("http://LibraryService/", "BookBorrowingExtensionFault");
     private final static QName _EmailSendingFault_QNAME = new QName("http://LibraryService/", "EmailSendingFault");
     private final static QName _ForgotPasswordFault_QNAME = new QName("http://LibraryService/", "ForgotPasswordFault");
-    private final static QName _LoanExtensionFault_QNAME = new QName("http://LibraryService/", "LoanExtensionFault");
     private final static QName _LoginFault_QNAME = new QName("http://LibraryService/", "LoginFault");
 
     /**
@@ -44,6 +44,14 @@ public class ObjectFactory {
      */
     public ValidEmailWith createValidEmailWith() {
         return new ValidEmailWith();
+    }
+
+    /**
+     * Create an instance of {@link CheckExpiration }
+     * 
+     */
+    public CheckExpiration createCheckExpiration() {
+        return new CheckExpiration();
     }
 
     /**
@@ -87,43 +95,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Usager }
+     * Create an instance of {@link GeneratedUsager }
      * 
      */
-    public Usager createUsager() {
-        return new Usager();
+    public GeneratedUsager createGeneratedUsager() {
+        return new GeneratedUsager();
     }
 
     /**
-     * Create an instance of {@link GetLoansForResponse }
+     * Create an instance of {@link CheckExpirationResponse }
      * 
      */
-    public GetLoansForResponse createGetLoansForResponse() {
-        return new GetLoansForResponse();
+    public CheckExpirationResponse createCheckExpirationResponse() {
+        return new CheckExpirationResponse();
     }
 
     /**
-     * Create an instance of {@link Loan }
+     * Create an instance of {@link GeneratedBorrowing }
      * 
      */
-    public Loan createLoan() {
-        return new Loan();
+    public GeneratedBorrowing createGeneratedBorrowing() {
+        return new GeneratedBorrowing();
     }
 
     /**
-     * Create an instance of {@link GetLoansFor }
+     * Create an instance of {@link BorrowABook }
      * 
      */
-    public GetLoansFor createGetLoansFor() {
-        return new GetLoansFor();
-    }
-
-    /**
-     * Create an instance of {@link ExtendLoanResponse }
-     * 
-     */
-    public ExtendLoanResponse createExtendLoanResponse() {
-        return new ExtendLoanResponse();
+    public BorrowABook createBorrowABook() {
+        return new BorrowABook();
     }
 
     /**
@@ -159,6 +159,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link BorrowABookResponse }
+     * 
+     */
+    public BorrowABookResponse createBorrowABookResponse() {
+        return new BorrowABookResponse();
+    }
+
+    /**
      * Create an instance of {@link AddUserResponse }
      * 
      */
@@ -175,6 +183,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AddComment }
+     * 
+     */
+    public AddComment createAddComment() {
+        return new AddComment();
+    }
+
+    /**
+     * Create an instance of {@link GeneratedComment }
+     * 
+     */
+    public GeneratedComment createGeneratedComment() {
+        return new GeneratedComment();
+    }
+
+    /**
      * Create an instance of {@link GetBookAvailabilityResponse }
      * 
      */
@@ -183,19 +207,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Stock }
+     * Create an instance of {@link GeneratedStock }
      * 
      */
-    public Stock createStock() {
-        return new Stock();
-    }
-
-    /**
-     * Create an instance of {@link CheckExpiration }
-     * 
-     */
-    public CheckExpiration createCheckExpiration() {
-        return new CheckExpiration();
+    public GeneratedStock createGeneratedStock() {
+        return new GeneratedStock();
     }
 
     /**
@@ -215,35 +231,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Book }
+     * Create an instance of {@link GeneratedBook }
      * 
      */
-    public Book createBook() {
-        return new Book();
+    public GeneratedBook createGeneratedBook() {
+        return new GeneratedBook();
     }
 
     /**
-     * Create an instance of {@link AddNewLoanResponse }
+     * Create an instance of {@link AddCommentResponse }
      * 
      */
-    public AddNewLoanResponse createAddNewLoanResponse() {
-        return new AddNewLoanResponse();
-    }
-
-    /**
-     * Create an instance of {@link UpdatePassword }
-     * 
-     */
-    public UpdatePassword createUpdatePassword() {
-        return new UpdatePassword();
-    }
-
-    /**
-     * Create an instance of {@link CheckExpirationResponse }
-     * 
-     */
-    public CheckExpirationResponse createCheckExpirationResponse() {
-        return new CheckExpirationResponse();
+    public AddCommentResponse createAddCommentResponse() {
+        return new AddCommentResponse();
     }
 
     /**
@@ -252,6 +252,14 @@ public class ObjectFactory {
      */
     public UnspecifiedFault createUnspecifiedFault() {
         return new UnspecifiedFault();
+    }
+
+    /**
+     * Create an instance of {@link UpdatePassword }
+     * 
+     */
+    public UpdatePassword createUpdatePassword() {
+        return new UpdatePassword();
     }
 
     /**
@@ -271,19 +279,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddComment }
+     * Create an instance of {@link GetBorrowingFor }
      * 
      */
-    public AddComment createAddComment() {
-        return new AddComment();
-    }
-
-    /**
-     * Create an instance of {@link Comment }
-     * 
-     */
-    public Comment createComment() {
-        return new Comment();
+    public GetBorrowingFor createGetBorrowingFor() {
+        return new GetBorrowingFor();
     }
 
     /**
@@ -295,19 +295,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ExtendLoan }
-     * 
-     */
-    public ExtendLoan createExtendLoan() {
-        return new ExtendLoan();
-    }
-
-    /**
      * Create an instance of {@link UpdateUserInfos }
      * 
      */
     public UpdateUserInfos createUpdateUserInfos() {
         return new UpdateUserInfos();
+    }
+
+    /**
+     * Create an instance of {@link GetBorrowingForResponse }
+     * 
+     */
+    public GetBorrowingForResponse createGetBorrowingForResponse() {
+        return new GetBorrowingForResponse();
+    }
+
+    /**
+     * Create an instance of {@link ExtendBookBorrowingResponse }
+     * 
+     */
+    public ExtendBookBorrowingResponse createExtendBookBorrowingResponse() {
+        return new ExtendBookBorrowingResponse();
+    }
+
+    /**
+     * Create an instance of {@link ExtendBookBorrowing }
+     * 
+     */
+    public ExtendBookBorrowing createExtendBookBorrowing() {
+        return new ExtendBookBorrowing();
     }
 
     /**
@@ -319,27 +335,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AddNewLoan }
-     * 
-     */
-    public AddNewLoan createAddNewLoan() {
-        return new AddNewLoan();
-    }
-
-    /**
      * Create an instance of {@link ReturnBookResponse }
      * 
      */
     public ReturnBookResponse createReturnBookResponse() {
         return new ReturnBookResponse();
-    }
-
-    /**
-     * Create an instance of {@link AddCommentResponse }
-     * 
-     */
-    public AddCommentResponse createAddCommentResponse() {
-        return new AddCommentResponse();
     }
 
     /**
@@ -351,11 +351,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Library }
+     * Create an instance of {@link GeneratedLibrary }
      * 
      */
-    public Library createLibrary() {
-        return new Library();
+    public GeneratedLibrary createGeneratedLibrary() {
+        return new GeneratedLibrary();
     }
 
     /**
@@ -380,6 +380,15 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
      * 
      */
+    @XmlElementDecl(namespace = "http://LibraryService/", name = "BookBorrowingExtensionFault")
+    public JAXBElement<UnspecifiedFault> createBookBorrowingExtensionFault(UnspecifiedFault value) {
+        return new JAXBElement<UnspecifiedFault>(_BookBorrowingExtensionFault_QNAME, UnspecifiedFault.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
+     * 
+     */
     @XmlElementDecl(namespace = "http://LibraryService/", name = "EmailSendingFault")
     public JAXBElement<UnspecifiedFault> createEmailSendingFault(UnspecifiedFault value) {
         return new JAXBElement<UnspecifiedFault>(_EmailSendingFault_QNAME, UnspecifiedFault.class, null, value);
@@ -392,15 +401,6 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "http://LibraryService/", name = "ForgotPasswordFault")
     public JAXBElement<UnspecifiedFault> createForgotPasswordFault(UnspecifiedFault value) {
         return new JAXBElement<UnspecifiedFault>(_ForgotPasswordFault_QNAME, UnspecifiedFault.class, null, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link UnspecifiedFault }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://LibraryService/", name = "LoanExtensionFault")
-    public JAXBElement<UnspecifiedFault> createLoanExtensionFault(UnspecifiedFault value) {
-        return new JAXBElement<UnspecifiedFault>(_LoanExtensionFault_QNAME, UnspecifiedFault.class, null, value);
     }
 
     /**

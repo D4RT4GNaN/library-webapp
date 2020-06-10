@@ -33,7 +33,7 @@
                     <p th:text="${stock.quantity}"></p>
                 </div>
                 <h3 class="mb-auto" th:text="${stock.library.name}" data-toggle="tooltip" data-placement="bottom" th:title="${stock.library.address}"></h3>
-                <a class="btn btn-outline-lightbrown" th:unless="${authentication.equals('anonymousUser')}" th:href="@{/loan/new(libraryId=${stock.library.numberRef}, bookReference=${book.reference})}">Réservez</a>
+                <a class="btn btn-outline-lightbrown" th:unless="${authentication.equals('anonymousUser')}" th:href="@{/borrowing/new(libraryId=${stock.library.numberRef}, bookReference=${book.reference})}">Réservez</a>
             </li>
         </ul>
     </section>
