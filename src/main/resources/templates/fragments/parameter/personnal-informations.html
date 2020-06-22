@@ -8,7 +8,7 @@
         </a>
     </h3>
 
-    <form id="personal-data-form" th:object="${user}" th:action="@{/usager/update-user}" method="post">
+    <form id="personal-data-form" th:object="${user}" th:action="@{/user/update-user}" method="post">
         <input type="text" th:field="*{firstname}" class="personal-data-input form-control bg-input mb-3" readonly />
         <input type="text" th:field="*{lastname}" class="personal-data-input form-control bg-input mb-3" readonly />
         <input type="email" th:field="*{email}" class="personal-data-input form-control bg-input mb-3" readonly />
@@ -16,5 +16,5 @@
         <input type="submit" id="personal-data-submit" class="btn btn-outline-lightbrown" style="display: none"/>
     </form>
 
-    <script th:src="@{/js/parameter.personnal.information.js}" type="text/javascript"></script>
+    <script th:src="@{/js/parameter.personnal.informations.js}" type="text/javascript"></script>
 </div>

@@ -17,7 +17,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "LibraryServiceService", targetNamespace = "http://libraryservice/", wsdlLocation = "http://webserver:8080/libraryservice-webservice/libraryservice?wsdl")
+@WebServiceClient(name = "LibraryServiceService", targetNamespace = "http://libraryservice/", wsdlLocation = "http://localhost:8080/libraryservice-webservice/libraryservice?wsdl")
 public class LibraryServiceService
     extends Service
 {
@@ -30,7 +30,7 @@ public class LibraryServiceService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://webserver:8080/libraryservice-webservice/libraryservice?wsdl");
+            url = new URL("http://localhost:8080/libraryservice-webservice/libraryservice?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

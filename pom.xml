@@ -18,7 +18,7 @@
 	<groupId>org.openclassroom.project</groupId>
 	<artifactId>library-webapp</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<!-- ===== General's Informations ===== -->
 	<name>library-webapp</name>

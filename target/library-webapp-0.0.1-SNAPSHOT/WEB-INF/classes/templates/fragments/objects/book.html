@@ -1,18 +1,23 @@
-<figure xmlns:th="http://www.thymeleaf.org" th:object="${book}" class='book' th:fragment="3d-book">
-    <!-- Front -->
-    <ul class='hardcover_front'>
-        <li>
+<figure xmlns:th="http://www.thymeleaf.org" th:fragment="3d-book" class='book' th:object="${book}" >
 
-            <img th:src="*{imageUrl}" width="100%" height="100%" />
+    <!-- Front -->
+
+    <ul class='book_ul hardcover_front'>
+        <li>
+            <div class="coverDesign brown">
+                <span class="ribbon">NEW</span>
+                <img th:src="*{imageUrl}" width="99%" height="99%" />
+            </div>
         </li>
         <li></li>
     </ul>
 
     <!-- Pages -->
-    <ul class='page'>
+
+    <ul class='book_ul page'>
         <li></li>
-        <li id="content">
-            <p id="synopsis" th:text="*{synopsis}"></p>
+        <li>
+            <a class="btn" href="#">Download</a>
         </li>
         <li></li>
         <li></li>
@@ -20,23 +25,13 @@
     </ul>
 
     <!-- Back -->
-    <ul class='hardcover_back'>
+
+    <ul class='book_ul hardcover_back'>
         <li></li>
         <li></li>
     </ul>
-    <ul class='book_spine'>
+    <ul class='book_ul book_spine'>
         <li></li>
         <li></li>
     </ul>
-
-    <figcaption>
-        <h1 th:text="*{title}"></h1>
-        <p>By <span th:text="*{author}"></span></p>
-        <span th:each="i: ${#numbers.sequence(0, 4)}" class="d-inline">
-            <i th:if="${i} < *{mark}" class="fas fa-star"></i>
-            <i th:if="${i} >= *{mark}" class="far fa-star"></i>
-        </span>
-    </figcaption>
-
-    <script th:src="@{/js/book.js}" type="text/javascript"></script>
 </figure>

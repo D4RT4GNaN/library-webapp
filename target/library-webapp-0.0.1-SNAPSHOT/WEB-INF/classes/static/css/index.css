@@ -1,45 +1,7 @@
-:root {
-    --dark: #2c2210;
-    --light: #40331c;
-}
-
-html, body, #content-wrapper, #coverflow {
-    height: 100%;
-}
-
-html, body {
-    overflow: hidden;
-}
-
-body {
-    margin: 0;
-    background-color: #493c24;
-}
-
-.navbar {
-    z-index: 100;
-}
-
-.flipster--coverflow .flipster__item__content {
-    -webkit-box-reflect: inherit;
-    box-reflect: inherit;
-}
-
-.flipster__button {
-    z-index: 3;
-}
-
-#coverflow {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#logo, #logo svg {
-    height: 20%;
-    width: 20%;
-}
-
+/**
+    . Carousel
+ */
+/* The ground under the carousel */
 .ground {
     position: absolute;
     top: 0;
@@ -61,24 +23,23 @@ body {
     backface-visibility: hidden;
 }
 
-.ground::before, .coverflow-item-shadow::after {
+.ground::before, .carousel-item-shadow::after {
     content:'';
     position: absolute;
     width: 100%;
 }
 
-/* this contains a radial-gradient, which fakes the watch's dropshadow */
 .ground::before {
-    bottom: 500px;
+    bottom: 115%;
     left: 0;
-    height: 500px;
-    background-image: linear-gradient(var(--dark), var(--light));
+    height: 30%;
+    background-image: linear-gradient(var(--dark), var(--custom-brown));
     transform-origin: 50% 0;
     transform: rotateX(-70deg);
 }
 
-/*this contains a radial-gradient, which fakes the watch's dropshadow*/
-.coverflow-item-shadow::after {
+/* The shadow of the book on the ground */
+.carousel-item-shadow::after {
     bottom: 0;
     left: 125%;
     height: 20%;
@@ -86,70 +47,219 @@ body {
     -webkit-transition-duration: .5s;
     -moz-transition-duration: .5s;
     transition-duration: .5s;
-    /* background-image:radial-gradient(#2c2416, rgba(44, 36, 22, 0) 60%); */
-    background-image:radial-gradient(#231b0d, rgba(35, 27, 13, 0) 60%);
+    background-image:radial-gradient(var(--dark-brown), rgba(35, 27, 13, 0) 60%);
     background-size: 50% 80%;
     background-repeat: no-repeat;
     transform: translateX(-50%);
 }
 
-.fa-cog, .fa-sign-out-alt {
-    font-size: 1.5em;
+/* No result for book search */
+.no-result {
+    color: var(--beige);
+    font-size: xx-large;
+    text-shadow: 5px 5px 5px var(--dark);
 }
 
-.fa-cog {
-    color: rgba(0, 0, 0, .5);
-    -webkit-transform:rotate(-90deg);
-    transform:rotate(-90deg);
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
+/* The description under the carousel */
+#description {
+    position: absolute;
+    bottom: 20%;
+    color: var(--beige);
+    text-shadow: 5px 5px 5px var(--semitransparent-black);
+    text-align: center;
 }
 
-.fa-cog:hover {
-    color: #c8ad7f;
-    -webkit-transform:rotate(90deg);
-    transform:rotate(90deg);
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-
+#descriptionTitle {
+    font-size: xx-large;
 }
 
-.fa-sign-out-alt {
-    color: rgba(0, 0, 0, .5);
-    -webkit-transition: color 0.3s ease-out;
-    transition: color 0.3s ease-out;
+#mark {
+    font-size: x-large;
 }
 
-.fa-sign-out-alt:hover {
-    color: #c8ad7f;
-    -webkit-transition: color 0.3s ease-out;
-    transition: color 0.3s ease-out;
+.fa-chevron-down {
+    position: absolute;
+    bottom: 10%;
+    font-size: xx-large;
+    color: var(--beige);
+    animation: 1s ease-in-out infinite alternate chevron;
 }
 
-.btn-outline-brown {
-    color: rgba(0, 0, 0, .5);
-    background-image: none;
+/* Chevron down animation */
+@keyframes chevron {
+    from { bottom: 10%; }
+    to { bottom: 8%; }
+}
+
+/**
+    2. Book Detail
+ */
+
+/* Book synopsis */
+#synopsis {
+    color: var(--beige);
+    margin-top: 5%;
+}
+
+/* Book information table */
+.table-infos th {
+    background-color: var(--dark);
+    border-top: none;
+    color: var(--beige);
+}
+
+.table-infos td {
+    background-color: var(--beige);
+    border-top: 1px solid var(--dark)
+}
+
+/* Book availability list */
+.libraryList {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-inline-start: 0;
+}
+
+.libraryList .listItem {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.libraryList .listItem h3 {
+    font-size: large;
+    text-align: center;
+    color: var(--dark);
+    margin-top: 1em;
+}
+
+.libraryList .listItem div {
+    position: relative;
+    background-color: var(--dark);
+    border-radius: 50%;
+    color: var(--custom-brown);
+    height: 10em;
+    width: 10em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 2px 2px 2px var(--semitransparent-black);
+}
+
+.libraryList .listItem div::before {
+    position: absolute;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 5em;
+    top: 13%;
+    left: 27%;
+    content: "\f02d";
+    color: var(--beige);
+    text-shadow: 5px 5px 5px var(--semitransparent-black);
+}
+
+.libraryList .listItem div p {
+    color: var(--custom-brown);
+    font-size: large;
+    z-index: 1;
+    background-color: var(--beige);
+    width: 30%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.libraryList .listItem a {
+    margin-top: 1em;
+}
+
+/* The comment section */
+#comments * {
+    position: relative;
+    z-index: 1;
+}
+
+#comments {
+    position: relative;
+    margin-top: 15%;
+    color: var(--beige);
+    padding: 0;
+}
+
+#commentContent {
+    background-color: var(--dark);
+    margin: 0;
+    min-height: 100vh;
+}
+
+.contentComment {
+    border: 1px solid var(--dark);
+    border-radius: 10px;
+}
+
+#commentTitle {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#addCommentButton {
+    width: auto!important;
+}
+
+#addCommentForm {
+    display: none;
+}
+
+#addCommentButton:not([href]):not([tabindex]):hover {
+    color: var(--shadowed-black);
+}
+
+#commentsTable {
+    box-shadow: none;
+    color: var(--custom-brown);
+}
+
+#commentsTable thead {
+    display: none;
+}
+
+#commentsTable tbody tr {
     background-color: transparent;
-    border-color: rgba(0, 0, 0, .5);
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 2));
+}
+
+.tableRow {
+    margin-top: 1em;
+    padding: 8px 10px;
+    background-color: var(--beige);
+    box-shadow: 0 5px 5px var(--semitransparent-black);
+    border-radius: 10px;
+}
+
+.commentContainer .dataTables_paginate {
+    padding-bottom: 2em;
+}
+
+.commentContainer .dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: var(--custom-brown) !important;
     -webkit-transition: all 0.3s ease-out;
     transition: all 0.3s ease-out;
 }
 
-.btn-outline-brown:hover {
-    color: rgba(255, 255, 255, .2);
-    background-color: rgba(0, 0, 0, .5);
-    -webkit-transition: all 0.3s ease-out;
-    transition: all 0.3s ease-out;
-}
-
-.bg-input, .bg-input:focus {
-    color: var(--light);
-    background-color: #c8ad7f;
-    border-color: rgba(0, 0, 0, .5);
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
-}
-
-.bg-input::placeholder {
-    color: var(--light);
+/* Separator design */
+#separator {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    background-color: var(--dark);
+    transform: rotate(-7deg);
+    width: 150%;
+    height: 100vh;
+    z-index: 0;
+    box-shadow: 0 -5px 5px var(--semitransparent-black);
 }
